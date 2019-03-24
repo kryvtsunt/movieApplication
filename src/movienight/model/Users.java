@@ -1,8 +1,7 @@
 package movienight.model;
 
-import java.util.Date;
 
-public class User {
+public class Users {
 	
 	protected String userName;
 	protected String password;
@@ -11,7 +10,7 @@ public class User {
 	protected String email;
 	protected String phone;
 	
-	public User(String userName, String password, String firstName, String lastName, String email, String phone) {
+	public Users(String userName, String password, String firstName, String lastName, String email, String phone) {
 		this.userName = userName;
 		this.password = password;
 		this.firstName = firstName;
@@ -21,7 +20,7 @@ public class User {
 	}
 	
 	
-	public User(String userName) {
+	public Users(String userName) {
 		this.userName = userName;
 	}
 
@@ -76,4 +75,5 @@ public class User {
 	}
 	
 }
+
 
