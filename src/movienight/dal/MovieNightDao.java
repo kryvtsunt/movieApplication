@@ -31,6 +31,12 @@ public class MovieNightDao {
 		ResultSet resultKey = null;		
 		try {
 			connection = connectionManager.getConnection();
+			
+			// to create a MovieNigh, valid movie is required
+			Movie movie = MovieDao.getInstance().getMovieById(movieNight.getMovie().getMovieId());
+			if (movie == null) {
+				return null;
+			}
 			insertStmt = connection.prepareStatement(insertMovieNight, Statement.RETURN_GENERATED_KEYS);
 			insertStmt.setDate(1, movieNight.getDate());
 			insertStmt.setInt(2, movieNight.getMovie().getMovieId());

@@ -30,6 +30,40 @@ public class CastCrew {
 		super();
 		this.castId = castId;
 	}
+
+	public int getCastId() {
+		return castId;
+	}
+
+	public void setCastId(int castId) {
+		this.castId = castId;
+	}
+
+	public Movie getMoive() {
+		return moive;
+	}
+
+	public void setMoive(Movie moive) {
+		this.moive = moive;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+	public CastCrewRole getRole() {
+		return role;
+	}
+
+	public void setRole(CastCrewRole role) {
+		this.role = role;
+	}
+	
+	
 	
 	
 	
