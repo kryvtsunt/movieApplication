@@ -1,29 +1,32 @@
 package movienight.model;
 
-public class Movie {
+public class Movies {
 	
 	protected int movieId;
 	protected String title;
 	protected int releaseYear;
 	protected int runtime;
 	
-	public Movie(int movieId, String title, int releaseYear, int runtime) {
+	public Movies(int movieId, String title, int releaseYear, int runtime) {
 		super();
 		this.movieId = movieId;
 		this.title = title;
 		this.releaseYear = releaseYear;
 		this.runtime = runtime;
 	}
-	public Movie(String title, int releaseYear, int runtime) {
+	
+	public Movies(String title, int releaseYear, int runtime) {
 		super();
 		this.title = title;
 		this.releaseYear = releaseYear;
 		this.runtime = runtime;
 	}
-	public Movie(int movieId) {
+	
+	public Movies(int movieId) {
 		super();
 		this.movieId = movieId;
 	}
+
 	public int getMovieId() {
 		return movieId;
 	}
@@ -49,6 +52,5 @@ public class Movie {
 		this.runtime = runtime;
 	}
 	
-	
-
 }
+
