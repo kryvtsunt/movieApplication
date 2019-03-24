@@ -10,21 +10,21 @@ import java.sql.Statement;
 import movienight.model.*;
 
 
-public class MovieNightDao {
+public class MovieNightsDao {
 	protected ConnectionManager connectionManager;
 	
-	private static MovieNightDao instance = null;
-	protected MovieNightDao() {
+	private static MovieNightsDao instance = null;
+	protected MovieNightsDao() {
 		connectionManager = new ConnectionManager();
 	}
-	public static MovieNightDao getInstance() {
+	public static MovieNightsDao getInstance() {
 		if(instance == null) {
-			instance = new MovieNightDao();
+			instance = new MovieNightsDao();
 		}
 		return instance;
 	}
 
-	public MovieNight create(MovieNight movieNight) throws SQLException {
+	public MovieNights create(MovieNights movieNight) throws SQLException {
 		String insertMovieNight = "INSERT INTO MovieNight(Date, MovieId) VALUES(?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
@@ -33,7 +33,7 @@ public class MovieNightDao {
 			connection = connectionManager.getConnection();
 			
 			// to create a MovieNigh, valid movie is required
-			Movie movie = MovieDao.getInstance().getMovieById(movieNight.getMovie().getMovieId());
+			Movies movie = MoviesDao.getInstance().getMovieById(movieNight.getMovie().getMovieId());
 			if (movie == null) {
 				return null;
 			}
@@ -68,7 +68,7 @@ public class MovieNightDao {
 
 
 
-	public MovieNight getMovieNightById(int movieNightId) throws SQLException {
+	public MovieNights getMovieNightById(int movieNightId) throws SQLException {
 		String selectMovieNight = "SELECT * FROM MovieNight WHERE MovieNightId=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
@@ -81,8 +81,8 @@ public class MovieNightDao {
 			if(results.next()) {
 				Date date = results.getDate("Date");
 				int movieId = results.getInt("MovieId");
-				Movie movie = MovieDao.getInstance().getMovieById(movieId);
-				MovieNight movienight = new MovieNight(movieNightId, date, movie);
+				Movies movie = MoviesDao.getInstance().getMovieById(movieId);
+				MovieNights movienight = new MovieNights(movieNightId, date, movie);
 				return movienight;
 			}
 		} catch (SQLException e) {
@@ -103,7 +103,7 @@ public class MovieNightDao {
 	}
 	
 	
-	public MovieNight delete(MovieNight movieNight) throws SQLException {
+	public MovieNights delete(MovieNights movieNight) throws SQLException {
 		String deleteMovieNight = "DELETE FROM MovieNight WHERE MovieNightId=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;

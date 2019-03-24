@@ -181,7 +181,7 @@ public class AttendancesDao {
 				Attendances.AttendanceType attendanceType = Attendances.AttendanceType.valueOf(
 								results.getString("AttendanceType"));
 				
-				MovieNights movieNight = movieNightsDao.getMovieNightFromId(movieNightId);
+				MovieNights movieNight = movieNightsDao.getMovieNightById(movieNightId);
 				Users user = usersDao.getUserFromUserName(userName);
 				Attendances attendance = new Attendances(resultAttendanceId, movieNight, user, attendanceType);
 				return attendance;

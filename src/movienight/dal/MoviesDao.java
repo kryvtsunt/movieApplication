@@ -1,29 +1,32 @@
 package movienight.dal;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import movienight.model.*;
 
 
-public class MovieDao {
+public class MoviesDao {
 	protected ConnectionManager connectionManager;
 	
-	private static MovieDao instance = null;
-	protected MovieDao() {
+	private static MoviesDao instance = null;
+	protected MoviesDao() {
 		connectionManager = new ConnectionManager();
 	}
-	public static MovieDao getInstance() {
+	public static MoviesDao getInstance() {
 		if(instance == null) {
-			instance = new MovieDao();
+			instance = new MoviesDao();
 		}
 		return instance;
 	}
 
-	public Movie create(Movie movie) throws SQLException {
+	public Movies create(Movies movie) throws SQLException {
 		String insertMovie = "INSERT INTO Movie(Title, ReleaseYear, Runtime) VALUES(?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
@@ -62,7 +65,7 @@ public class MovieDao {
 
 
 
-	public Movie getMovieById(int movieId) throws SQLException {
+	public Movies getMovieById(int movieId) throws SQLException {
 		String selectMovie = "SELECT * FROM Movie WHERE MovieId=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
@@ -76,7 +79,7 @@ public class MovieDao {
 				String title = results.getString("Title");
 				int releaseYear = results.getInt("RelaseYear");
 				int runtime = results.getInt("Runtime");
-				Movie movie = new Movie(movieId, title, releaseYear, runtime);
+				Movies movie = new Movies(movieId, title, releaseYear, runtime);
 				return movie;
 			}
 		} catch (SQLException e) {
@@ -97,7 +100,7 @@ public class MovieDao {
 	}
 	
 	
-	public Movie delete(Movie movie) throws SQLException {
+	public Movies delete(Movies movie) throws SQLException {
 		String deleteMovie = "DELETE FROM Movie WHERE MovieId=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
@@ -120,7 +123,7 @@ public class MovieDao {
 		}
 	}
 	
-	public Movie updateTitle(Movie movie, String title) throws SQLException {
+	public Movies updateTitle(Movies movie, String title) throws SQLException {
 		String updateMovie = "UPDATE Movie SET Title=? WHERE MovieId=?;";
 		Connection connection = null;
 		PreparedStatement updateStmt = null;
@@ -143,6 +146,42 @@ public class MovieDao {
 				updateStmt.close();
 			}
 		}
+	}
+	
+	public List<Movies> getMovieByTitle(String title) throws SQLException {
+		List<Movies> movies = new ArrayList<Movies>();
+		String selectperson =
+			"SELECT * FROM Movie WHERE Title=?;";
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectperson);
+			selectStmt.setString(1, title);
+			results = selectStmt.executeQuery();
+			while(results.next()) {
+				int movieId = results.getInt("MovieId");
+				int releaseYear = results.getInt("ReleaseYear");
+				int runtime = results.getInt("Runtime");
+				Movies movie = new Movies(movieId, title, releaseYear, runtime);
+				movies.add(movie);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(selectStmt != null) {
+				selectStmt.close();
+			}
+			if(results != null) {
+				results.close();
+			}
+		}
+		return movies;
 	}
 
 

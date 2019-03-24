@@ -13,21 +13,21 @@ import java.util.List;
 import movienight.model.*;
 
 
-public class MovieGenreDao {
+public class MovieGenresDao {
 	protected ConnectionManager connectionManager;
 	
-	private static MovieGenreDao instance = null;
-	protected MovieGenreDao() {
+	private static MovieGenresDao instance = null;
+	protected MovieGenresDao() {
 		connectionManager = new ConnectionManager();
 	}
-	public static MovieGenreDao getInstance() {
+	public static MovieGenresDao getInstance() {
 		if(instance == null) {
-			instance = new MovieGenreDao();
+			instance = new MovieGenresDao();
 		}
 		return instance;
 	}
 
-	public MovieGenre create(MovieGenre movieGenre) throws SQLException {
+	public MovieGenres create(MovieGenres movieGenre) throws SQLException {
 		String insertMovieGenre = "INSERT INTO MovieGenre(MovieId, GenreId) VALUES(?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
@@ -35,8 +35,8 @@ public class MovieGenreDao {
 		try {
 			connection = connectionManager.getConnection();
 			// to create MovieGenre, a valid movie-person required;
-			Movie movie = MovieDao.getInstance().getMovieById(movieGenre.getMovie().getMovieId());
-			Genre genre = GenreDao.getInstance().getGenreById(movieGenre.getGenre().getGenreId());
+			Movies movie = MoviesDao.getInstance().getMovieById(movieGenre.getMovie().getMovieId());
+			Genres genre = GenresDao.getInstance().getGenreById(movieGenre.getGenre().getGenreId());
 			if (movie == null | genre == null) {
 				return null;
 			}
@@ -69,7 +69,7 @@ public class MovieGenreDao {
 		}
 	}
 
-	public MovieGenre delete(MovieGenre movieGenre) throws SQLException {
+	public MovieGenres delete(MovieGenres movieGenre) throws SQLException {
 		String deleteMovieGenre = "DELETE FROM MovieGenre WHERE MovieGenreId=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
@@ -93,7 +93,7 @@ public class MovieGenreDao {
 	}
 
 
-	public MovieGenre getMovieGenreById(int movieGenreId) throws SQLException {
+	public MovieGenres getMovieGenreById(int movieGenreId) throws SQLException {
 		String selectMovieGenre = "SELECT * FROM MovieGenre WHERE MovieGenreId=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
@@ -106,9 +106,9 @@ public class MovieGenreDao {
 			if(results.next()) {
 				int mid = results.getInt("MovieId");
 				int gid = results.getInt("GenreId");
-				Movie movie = MovieDao.getInstance().getMovieById(mid);
-				Genre genre = GenreDao.getInstance().getGenreById(gid);
-				MovieGenre MovieGenre = new MovieGenre(movieGenreId, genre, movie);
+				Movies movie = MoviesDao.getInstance().getMovieById(mid);
+				Genres genre = GenresDao.getInstance().getGenreById(gid);
+				MovieGenres MovieGenre = new MovieGenres(movieGenreId, genre, movie);
 				return MovieGenre;
 			}
 		} catch (SQLException e) {

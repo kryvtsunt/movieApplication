@@ -1,17 +1,17 @@
 package movienight.model;
 
-public class CastCrew {
+public class CastCrews {
 	
 	protected int castId;
-	protected Movie moive;
-	protected Person person;
+	protected Movies moive;
+	protected Persons person;
 	protected CastCrewRole role;
 	
 	public enum CastCrewRole {
 		ACTOR, DIRECTOR
 	}
 
-	public CastCrew(int castId, Movie moive, Person person, CastCrewRole role) {
+	public CastCrews(int castId, Movies moive, Persons person, CastCrewRole role) {
 		super();
 		this.castId = castId;
 		this.moive = moive;
@@ -19,14 +19,14 @@ public class CastCrew {
 		this.role = role;
 	}
 
-	public CastCrew(Movie moive, Person person, CastCrewRole role) {
+	public CastCrews(Movies moive, Persons person, CastCrewRole role) {
 		super();
 		this.moive = moive;
 		this.person = person;
 		this.role = role;
 	}
 
-	public CastCrew(int castId) {
+	public CastCrews(int castId) {
 		super();
 		this.castId = castId;
 	}
@@ -39,19 +39,19 @@ public class CastCrew {
 		this.castId = castId;
 	}
 
-	public Movie getMoive() {
+	public Movies getMoive() {
 		return moive;
 	}
 
-	public void setMoive(Movie moive) {
+	public void setMoive(Movies moive) {
 		this.moive = moive;
 	}
 
-	public Person getPerson() {
+	public Persons getPerson() {
 		return person;
 	}
 
-	public void setPerson(Person person) {
+	public void setPerson(Persons person) {
 		this.person = person;
 	}
 

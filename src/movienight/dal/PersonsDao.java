@@ -13,21 +13,21 @@ import java.util.List;
 import movienight.model.*;
 
 
-public class PersonDao {
+public class PersonsDao {
 	protected ConnectionManager connectionManager;
 	
-	private static PersonDao instance = null;
-	protected PersonDao() {
+	private static PersonsDao instance = null;
+	protected PersonsDao() {
 		connectionManager = new ConnectionManager();
 	}
-	public static PersonDao getInstance() {
+	public static PersonsDao getInstance() {
 		if(instance == null) {
-			instance = new PersonDao();
+			instance = new PersonsDao();
 		}
 		return instance;
 	}
 
-	public Person create(Person person) throws SQLException {
+	public Persons create(Persons person) throws SQLException {
 		String insertPerson = "INSERT INTO Person(FirstName,LastName, DateOfBirth) VALUES(?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
@@ -64,7 +64,7 @@ public class PersonDao {
 		}
 	}
 
-	public Person updateLastName(Person person, String newLastName) throws SQLException {
+	public Persons updateLastName(Persons person, String newLastName) throws SQLException {
 		String updatePerson = "UPDATE person SET LastName=? WHERE PersonId=?;";
 		Connection connection = null;
 		PreparedStatement updateStmt = null;
@@ -89,7 +89,7 @@ public class PersonDao {
 		}
 	}
 
-	public Person delete(Person person) throws SQLException {
+	public Persons delete(Persons person) throws SQLException {
 		String deletePerson = "DELETE FROM person WHERE PersonId=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
@@ -113,7 +113,7 @@ public class PersonDao {
 	}
 
 
-	public Person getPersonById(int personId) throws SQLException {
+	public Persons getPersonById(int personId) throws SQLException {
 		String selectPerson = "SELECT FirstName,LastName, PersonId FROM Person WHERE PersonId=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
@@ -127,7 +127,7 @@ public class PersonDao {
 				String firstName = results.getString("FirstName");
 				String lastName = results.getString("LastName");
 				Date dateOdBirth = results.getDate("DateOfBirth");
-				Person person = new Person(personId, firstName, lastName, dateOdBirth);
+				Persons person = new Persons(personId, firstName, lastName, dateOdBirth);
 				return person;
 			}
 		} catch (SQLException e) {
@@ -148,8 +148,8 @@ public class PersonDao {
 	}
 
 	
-	public List<Person> getpersonsByFirstName(String firstName) throws SQLException {
-		List<Person> persons = new ArrayList<Person>();
+	public List<Persons> getpersonsByFirstName(String firstName) throws SQLException {
+		List<Persons> persons = new ArrayList<Persons>();
 		String selectperson =
 			"SELECT * FROM Person WHERE FirstName=?;";
 		Connection connection = null;
@@ -164,7 +164,7 @@ public class PersonDao {
 				int personId = results.getInt("PersonId");
 				String lastName = results.getString("LastName");
 				Date dateOfBirth = results.getDate("DateOfBirth");
-				Person person = new Person(personId, firstName, lastName, dateOfBirth);
+				Persons person = new Persons(personId, firstName, lastName, dateOfBirth);
 				persons.add(person);
 			}
 		} catch (SQLException e) {

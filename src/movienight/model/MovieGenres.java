@@ -1,21 +1,21 @@
 package movienight.model;
 
-public class MovieGenre {
+public class MovieGenres {
 	protected int movieGenreId;
-	protected Genre genre;
-	protected Movie movie;
-	public MovieGenre(int movieGenreId, Genre genre, Movie movie) {
+	protected Genres genre;
+	protected Movies movie;
+	public MovieGenres(int movieGenreId, Genres genre, Movies movie) {
 		super();
 		this.movieGenreId = movieGenreId;
 		this.genre = genre;
 		this.movie = movie;
 	}
-	public MovieGenre(Genre genre, Movie movie) {
+	public MovieGenres(Genres genre, Movies movie) {
 		super();
 		this.genre = genre;
 		this.movie = movie;
 	}
-	public MovieGenre(int movieGenreId) {
+	public MovieGenres(int movieGenreId) {
 		super();
 		this.movieGenreId = movieGenreId;
 	}
@@ -25,16 +25,16 @@ public class MovieGenre {
 	public void setMovieGenreId(int movieGenreId) {
 		this.movieGenreId = movieGenreId;
 	}
-	public Genre getGenre() {
+	public Genres getGenre() {
 		return genre;
 	}
-	public void setGenre(Genre genre) {
+	public void setGenre(Genres genre) {
 		this.genre = genre;
 	}
-	public Movie getMovie() {
+	public Movies getMovie() {
 		return movie;
 	}
-	public void setMovie(Movie movie) {
+	public void setMovie(Movies movie) {
 		this.movie = movie;
 	}
 	

@@ -2,26 +2,26 @@ package movienight.model;
 
 import java.sql.Date;
 
-public class Person {
+public class Persons {
 	
 	protected int personId;
 	protected String firstName;
 	protected String lastName;
 	protected Date dateOfBirth;
-	public Person(int personId, String firstName, String lastName, Date dateOfBirth) {
+	public Persons(int personId, String firstName, String lastName, Date dateOfBirth) {
 		super();
 		this.personId = personId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
 	}
-	public Person(String firstName, String lastName, Date dateOfBirth) {
+	public Persons(String firstName, String lastName, Date dateOfBirth) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
 	}
-	public Person(int personId) {
+	public Persons(int personId) {
 		super();
 		this.personId = personId;
 	}

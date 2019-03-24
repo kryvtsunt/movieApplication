@@ -1,14 +1,14 @@
 package movienight.model;
 
-public class Genre {
+public class Genres {
 	protected int genreId;
 	protected String name;
-	public Genre(int genreId, String name) {
+	public Genres(int genreId, String name) {
 		super();
 		this.genreId = genreId;
 		this.name = name;
 	}
-	public Genre(String name) {
+	public Genres(String name) {
 		super();
 		this.name = name;
 	}

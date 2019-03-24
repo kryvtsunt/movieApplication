@@ -1,6 +1,6 @@
 package movienight.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class MovieNights {
 	protected int movieNightId;
@@ -24,6 +24,10 @@ public class MovieNights {
 		this.movieNightId = movieNightId;
 	}
 
+	public int getMovieNightId() {
+		return movieNightId;
+	}
+
 	public void setMovieNightId(int movieNightId) {
 		this.movieNightId = movieNightId;
 	}
@@ -40,8 +44,10 @@ public class MovieNights {
 		return movie;
 	}
 
-	public void setMovieId(Movies movie) {
+	public void setMovie(Movies movie) {
 		this.movie = movie;
 	}
+
+
 
 }

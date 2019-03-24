@@ -13,39 +13,47 @@ import java.util.List;
 import movienight.model.*;
 
 
-public class GenreDao {
+public class CastCrewsDao {
 	protected ConnectionManager connectionManager;
 	
-	private static GenreDao instance = null;
-	protected GenreDao() {
+	private static CastCrewsDao instance = null;
+	protected CastCrewsDao() {
 		connectionManager = new ConnectionManager();
 	}
-	public static GenreDao getInstance() {
+	public static CastCrewsDao getInstance() {
 		if(instance == null) {
-			instance = new GenreDao();
+			instance = new CastCrewsDao();
 		}
 		return instance;
 	}
 
-	public Genre create(Genre genre) throws SQLException {
-		String insertgenre = "INSERT INTO Genre(Name) VALUES(?);";
+	public CastCrews create(CastCrews cast) throws SQLException {
+		String insertCastCrew = "INSERT INTO CastCrew(MovieId, PersonId, Role) VALUES(?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;		
 		try {
 			connection = connectionManager.getConnection();
-			insertStmt = connection.prepareStatement(insertgenre,  Statement.RETURN_GENERATED_KEYS);
-			insertStmt.setString(1, genre.getName());
+			// to create castCrew, valid movie-person required;
+			Movie movie = MoviesDao.getInstance().getMovieById(cast.getMoive().getMovieId());
+			Persons person = PersonsDao.getInstance().getPersonById(cast.getPerson().getPersonId());
+			if (movie == null | person == null) {
+				return null;
+			}
+			insertStmt = connection.prepareStatement(insertCastCrew,  Statement.RETURN_GENERATED_KEYS);
+			insertStmt.setInt(1, cast.getMoive().getMovieId());
+			insertStmt.setInt(2, cast.getPerson().getPersonId());
+			insertStmt.setString(3, cast.getRole().name());
 			insertStmt.executeUpdate();
 			resultKey = insertStmt.getGeneratedKeys();
-			int  genreId = -1;
+			int  castCrewId = -1;
 			if(resultKey.next()) {
-				genreId = resultKey.getInt(1);
+				castCrewId = resultKey.getInt(1);
 			} else {
 				throw new SQLException("Unable to retrieve auto-generated key.");
 			}
-			genre.setGenreId(genreId);
-			return genre;
+			cast.setCastId(castCrewId);
+			return cast;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw e;
@@ -62,39 +70,14 @@ public class GenreDao {
 		}
 	}
 
-	public Genre updateName(Genre genre, String newName) throws SQLException {
-		String updategenre = "UPDATE genre SET Name=? WHERE genreId=?;";
-		Connection connection = null;
-		PreparedStatement updateStmt = null;
-		try {
-			connection = connectionManager.getConnection();
-			updateStmt = connection.prepareStatement(updategenre);
-			updateStmt.setString(1, newName);
-			updateStmt.setInt(2, genre.getGenreId());
-			updateStmt.executeUpdate();
-			genre.setName(newName);
-			return genre;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw e;
-		} finally {
-			if(connection != null) {
-				connection.close();
-			}
-			if(updateStmt != null) {
-				updateStmt.close();
-			}
-		}
-	}
-
-	public Genre delete(Genre genre) throws SQLException {
-		String deletegenre = "DELETE FROM genre WHERE genreId=?;";
+	public CastCrews delete(CastCrews castCrew) throws SQLException {
+		String deleteCastCrew = "DELETE FROM CastCrew WHERE CastId=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
 		try {
 			connection = connectionManager.getConnection();
-			deleteStmt = connection.prepareStatement(deletegenre);
-			deleteStmt.setInt(1, genre.getGenreId());
+			deleteStmt = connection.prepareStatement(deleteCastCrew);
+			deleteStmt.setInt(1, castCrew.getCastId());
 			deleteStmt.executeUpdate();
 			return null;
 		} catch (SQLException e) {
@@ -111,20 +94,25 @@ public class GenreDao {
 	}
 
 
-	public Genre getGenreById(int genreId) throws SQLException {
-		String selectgenre = "SELECT * FROM genre WHERE genreId=?;";
+	public CastCrews getCastCrewById(int castCrewId) throws SQLException {
+		String selectCastCrew = "SELECT * FROM CastCrew WHERE CastId=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
 		try {
 			connection = connectionManager.getConnection();
-			selectStmt = connection.prepareStatement(selectgenre);
-			selectStmt.setInt(1, genreId);
+			selectStmt = connection.prepareStatement(selectCastCrew);
+			selectStmt.setInt(1, castCrewId);
 			results = selectStmt.executeQuery();
 			if(results.next()) {
-				String name = results.getString("Name");
-				Genre genre = new Genre(genreId, name);
-				return genre;
+
+				int mid = results.getInt("MovieId");
+				int pid = results.getInt("PesronId");
+				CastCrews.CastCrewRole role = CastCrews.CastCrewRole.valueOf(results.getString("CastCrewRole"));
+				Movie movie = MoviesDao.getInstance().getMovieById(mid);
+				Persons person = PersonsDao.getInstance().getPersonById(pid);
+				CastCrews CastCrew = new CastCrews(castCrewId, movie, person, role);
+				return CastCrew;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -143,4 +131,5 @@ public class GenreDao {
 		return null;
 	}
 
+	
 }

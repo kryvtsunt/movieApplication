@@ -11,11 +11,11 @@
 <title>Find a User</title>
 </head>
 <body>
-	<form action="findusers" method="post">
-		<h1>Search for a BlogUser by FirstName</h1>
+	<form action="findmovies" method="post">
+		<h1>Search for a Movie by Title</h1>
 		<p>
-			<label for="firstname">FirstName</label>
-			<input id="firstname" name="firstname" value="${fn:escapeXml(param.firstname)}">
+			<label for="title">FirstName</label>
+			<input id="title" name="title" value="${fn:escapeXml(param.title)}">
 		</p>
 		<p>
 			<input type="submit">
@@ -24,30 +24,25 @@
 		</p>
 	</form>
 	<br/>
-	<div id="userCreate"><a href="usercreate">Create BlogUser</a></div>
+	<div id="movieCreate"><a href="moviecreate">Create Movie</a></div>
 	<br/>
-	<h1>Matching BlogUsers</h1>
+	<h1>Matching Movies</h1>
         <table border="1">
             <tr>
-                <th>UserName</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>DoB</th>
-                <th>BlogPosts</th>
-                <th>Comments</th>
-                <th>Delete BlogUser</th>
-                <th>Update BlogUser</th>
+                <th>Title</th>
+                <th>ReleaseYear</th>
+                <th>Runtime</th>
+                <th>Delete Movie</th>
+                <th>Update Update</th>
             </tr>
-            <c:forEach items="${blogUsers}" var="blogUser" >
+            <c:forEach items="${movies}" var="movie" >
                 <tr>
-                    <td><c:out value="${blogUser.getUserName()}" /></td>
-                    <td><c:out value="${blogUser.getFirstName()}" /></td>
-                    <td><c:out value="${blogUser.getLastName()}" /></td>
+                    <td><c:out value="${movie.getTitle()}" /></td>
+                    <td><c:out value="${movie.getReleaseYear()}" pattern="yyyy-MM-dd" /></td>
+                    <td><c:out value="${movie.getRuntime()}" /></td>
                     <td><fmt:formatDate value="${blogUser.getDob()}" pattern="yyyy-MM-dd"/></td>
-                    <td><a href="userblogposts?username=<c:out value="${blogUser.getUserName()}"/>">BlogPosts</a></td>
-                    <td><a href="blogcomments?username=<c:out value="${blogUser.getUserName()}"/>">BlogComments</a></td>
-                    <td><a href="userdelete?username=<c:out value="${blogUser.getUserName()}"/>">Delete</a></td>
-                    <td><a href="userupdate?username=<c:out value="${blogUser.getUserName()}"/>">Update</a></td>
+                    <td><a href="userdelete?username=<c:out value="${movie.getMovieId()}"/>">Delete</a></td>
+                    <td><a href="userupdate?username=<c:out value="${movie.getMovieId()}"/>">Update</a></td>
                 </tr>
             </c:forEach>
        </table>
