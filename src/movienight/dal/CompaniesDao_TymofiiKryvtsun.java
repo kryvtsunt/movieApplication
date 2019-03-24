@@ -12,7 +12,7 @@ import java.util.List;
 import movienight.model.*;
 
 
-public class CompaniesDao_TymofiiKryvtsun extends UsersDao_TymofiiKryvtsun {
+public class CompaniesDao_TymofiiKryvtsun extends MovieDao {
 	private static CompaniesDao_TymofiiKryvtsun instance = null;
 	protected CompaniesDao_TymofiiKryvtsun() {
 		super();

@@ -15,12 +15,12 @@ import java.sql.Statement;
 
 
 public class RestaurantsDao_TymofiiKryvtsun {
-	protected ConnectionManager_TymofiiKryvtsun connectionManager;
+	protected ConnectionManager connectionManager;
 	
 	// Single pattern: instantiation is limited to one object.
 	private static RestaurantsDao_TymofiiKryvtsun instance = null;
 	protected RestaurantsDao_TymofiiKryvtsun() {
-		connectionManager = new ConnectionManager_TymofiiKryvtsun();
+		connectionManager = new ConnectionManager();
 	}
 	public static RestaurantsDao_TymofiiKryvtsun getInstance() {
 		if(instance == null) {

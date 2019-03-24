@@ -13,11 +13,11 @@ import java.sql.Date;
 
 
 public class CreditCardsDao_TymofiiKryvtsun {
-	protected ConnectionManager_TymofiiKryvtsun connectionManager;
+	protected ConnectionManager connectionManager;
 
 	private static CreditCardsDao_TymofiiKryvtsun instance = null;
 	protected CreditCardsDao_TymofiiKryvtsun() {
-		connectionManager = new ConnectionManager_TymofiiKryvtsun();
+		connectionManager = new ConnectionManager();
 	}
 	public static CreditCardsDao_TymofiiKryvtsun getInstance() {
 		if(instance == null) {

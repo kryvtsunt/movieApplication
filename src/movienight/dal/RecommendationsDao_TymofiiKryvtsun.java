@@ -13,11 +13,11 @@ import movienight.model.*;
 
 
 public class RecommendationsDao_TymofiiKryvtsun {
-	protected ConnectionManager_TymofiiKryvtsun connectionManager;
+	protected ConnectionManager connectionManager;
 
 	private static RecommendationsDao_TymofiiKryvtsun instance = null;
 	protected RecommendationsDao_TymofiiKryvtsun() {
-		connectionManager = new ConnectionManager_TymofiiKryvtsun();
+		connectionManager = new ConnectionManager();
 	}
 	public static RecommendationsDao_TymofiiKryvtsun getInstance() {
 		if(instance == null) {
@@ -110,7 +110,7 @@ public class RecommendationsDao_TymofiiKryvtsun {
 			selectStmt = connection.prepareStatement(selectrecommendation);
 			selectStmt.setInt(1, recommendationId);
 			results = selectStmt.executeQuery();
-			UsersDao_TymofiiKryvtsun usersDao = UsersDao_TymofiiKryvtsun.getInstance();
+			MovieDao usersDao = MovieDao.getInstance();
 			RestaurantsDao_TymofiiKryvtsun restaurantsDao = RestaurantsDao_TymofiiKryvtsun.getInstance();
 			if(results.next()) {
 				int resultrecommendationId = results.getInt("recommendationId");
@@ -152,7 +152,7 @@ public class RecommendationsDao_TymofiiKryvtsun {
 			selectStmt = connection.prepareStatement(selectRecommendations);
 			selectStmt.setString(1, userName);
 			results = selectStmt.executeQuery();
-			UsersDao_TymofiiKryvtsun usersDao = UsersDao_TymofiiKryvtsun.getInstance();
+			MovieDao usersDao = MovieDao.getInstance();
 			RestaurantsDao_TymofiiKryvtsun restaurantsDao = RestaurantsDao_TymofiiKryvtsun.getInstance();			
 			while(results.next()) {
 				int resultrecommendationId = results.getInt("recommendationId");
@@ -193,7 +193,7 @@ public class RecommendationsDao_TymofiiKryvtsun {
 			selectStmt = connection.prepareStatement(selectRecommendations);
 			selectStmt.setInt(1, restaurantId);
 			results = selectStmt.executeQuery();
-			UsersDao_TymofiiKryvtsun usersDao = UsersDao_TymofiiKryvtsun.getInstance();
+			MovieDao usersDao = MovieDao.getInstance();
 			RestaurantsDao_TymofiiKryvtsun restaurantsDao = RestaurantsDao_TymofiiKryvtsun.getInstance();			
 			while(results.next()) {
 				int resultrecommendationId = results.getInt("recommendationId");

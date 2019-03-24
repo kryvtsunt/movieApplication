@@ -13,11 +13,11 @@ import movienight.model.*;
 
 
 public class ReviewsDao_TymofiiKryvtsun {
-	protected ConnectionManager_TymofiiKryvtsun connectionManager;
+	protected ConnectionManager connectionManager;
 
 	private static ReviewsDao_TymofiiKryvtsun instance = null;
 	protected ReviewsDao_TymofiiKryvtsun() {
-		connectionManager = new ConnectionManager_TymofiiKryvtsun();
+		connectionManager = new ConnectionManager();
 	}
 	public static ReviewsDao_TymofiiKryvtsun getInstance() {
 		if(instance == null) {
@@ -113,7 +113,7 @@ public class ReviewsDao_TymofiiKryvtsun {
 			selectStmt = connection.prepareStatement(selectReview);
 			selectStmt.setInt(1, reviewId);
 			results = selectStmt.executeQuery();
-			UsersDao_TymofiiKryvtsun usersDao = UsersDao_TymofiiKryvtsun.getInstance();
+			MovieDao usersDao = MovieDao.getInstance();
 			RestaurantsDao_TymofiiKryvtsun restaurantsDao = RestaurantsDao_TymofiiKryvtsun.getInstance();
 			if(results.next()) {
 				int resultReviewId = results.getInt("ReviewId");
@@ -158,7 +158,7 @@ public class ReviewsDao_TymofiiKryvtsun {
 			selectStmt = connection.prepareStatement(selectReviews);
 			selectStmt.setString(1, userName);
 			results = selectStmt.executeQuery();
-			UsersDao_TymofiiKryvtsun usersDao = UsersDao_TymofiiKryvtsun.getInstance();
+			MovieDao usersDao = MovieDao.getInstance();
 			RestaurantsDao_TymofiiKryvtsun restaurantsDao = RestaurantsDao_TymofiiKryvtsun.getInstance();			
 			while(results.next()) {
 				int resultReviewId = results.getInt("ReviewId");
@@ -202,7 +202,7 @@ public class ReviewsDao_TymofiiKryvtsun {
 			selectStmt = connection.prepareStatement(selectReviews);
 			selectStmt.setInt(1, restaurantId);
 			results = selectStmt.executeQuery();
-			UsersDao_TymofiiKryvtsun usersDao = UsersDao_TymofiiKryvtsun.getInstance();
+			MovieDao usersDao = MovieDao.getInstance();
 			RestaurantsDao_TymofiiKryvtsun restaurantsDao = RestaurantsDao_TymofiiKryvtsun.getInstance();			
 			while(results.next()) {
 				int resultReviewId = results.getInt("ReviewId");

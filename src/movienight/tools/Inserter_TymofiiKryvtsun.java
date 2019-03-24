@@ -13,7 +13,7 @@ public class Inserter_TymofiiKryvtsun {
 
 	public static void main(String[] args) throws SQLException {
 		// DAO instances
-		UsersDao_TymofiiKryvtsun usersDao = UsersDao_TymofiiKryvtsun.getInstance();
+		MovieDao usersDao = MovieDao.getInstance();
 		CreditCardsDao_TymofiiKryvtsun creditCardsDao = CreditCardsDao_TymofiiKryvtsun.getInstance();
 		CompaniesDao_TymofiiKryvtsun companiesDao = CompaniesDao_TymofiiKryvtsun.getInstance();
 		RestaurantsDao_TymofiiKryvtsun restaurantsDao = RestaurantsDao_TymofiiKryvtsun.getInstance();

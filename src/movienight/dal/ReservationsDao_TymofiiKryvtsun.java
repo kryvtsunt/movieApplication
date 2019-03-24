@@ -13,11 +13,11 @@ import movienight.model.*;
 
 
 public class ReservationsDao_TymofiiKryvtsun {
-	protected ConnectionManager_TymofiiKryvtsun connectionManager;
+	protected ConnectionManager connectionManager;
 
 	private static ReservationsDao_TymofiiKryvtsun instance = null;
 	protected ReservationsDao_TymofiiKryvtsun() {
-		connectionManager = new ConnectionManager_TymofiiKryvtsun();
+		connectionManager = new ConnectionManager();
 	}
 	public static ReservationsDao_TymofiiKryvtsun getInstance() {
 		if(instance == null) {
@@ -113,7 +113,7 @@ public class ReservationsDao_TymofiiKryvtsun {
 			selectStmt = connection.prepareStatement(selectReservation);
 			selectStmt.setInt(1, reservationId);
 			results = selectStmt.executeQuery();
-			UsersDao_TymofiiKryvtsun usersDao = UsersDao_TymofiiKryvtsun.getInstance();
+			MovieDao usersDao = MovieDao.getInstance();
 			RestaurantsDao_TymofiiKryvtsun restaurantsDao = RestaurantsDao_TymofiiKryvtsun.getInstance();
 			if(results.next()) {
 				int resultReservationId = results.getInt("ReservationId");
@@ -158,7 +158,7 @@ public class ReservationsDao_TymofiiKryvtsun {
 			selectStmt = connection.prepareStatement(selectReservations);
 			selectStmt.setString(1, userName);
 			results = selectStmt.executeQuery();
-			UsersDao_TymofiiKryvtsun usersDao = UsersDao_TymofiiKryvtsun.getInstance();
+			MovieDao usersDao = MovieDao.getInstance();
 			RestaurantsDao_TymofiiKryvtsun restaurantsDao = RestaurantsDao_TymofiiKryvtsun.getInstance();			
 			while(results.next()) {
 				int resultReservationId = results.getInt("ReservationId");
@@ -202,7 +202,7 @@ public class ReservationsDao_TymofiiKryvtsun {
 			selectStmt = connection.prepareStatement(selectReservations);
 			selectStmt.setInt(1, restaurantId);
 			results = selectStmt.executeQuery();
-			UsersDao_TymofiiKryvtsun usersDao = UsersDao_TymofiiKryvtsun.getInstance();
+			MovieDao usersDao = MovieDao.getInstance();
 			RestaurantsDao_TymofiiKryvtsun restaurantsDao = RestaurantsDao_TymofiiKryvtsun.getInstance();			
 			while(results.next()) {
 				int resultReservationId = results.getInt("ReservationId");
