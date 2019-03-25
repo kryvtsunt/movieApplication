@@ -19,13 +19,13 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet("/findmovies")
-public class findMovies extends HttpServlet {
+public class FindMovies extends HttpServlet {
 	
-	protected MoviesDao movieDao;
+	protected MoviesDao moviesDao;
 	
 	@Override
 	public void init() throws ServletException {
-		movieDao = MoviesDao.getInstance();
+		moviesDao = MoviesDao.getInstance();
 	}
 	
 	@Override
@@ -41,7 +41,7 @@ public class findMovies extends HttpServlet {
             messages.put("success", "Please enter a valid name.");
         } else {
         	try {
-            	movies = movieDao.getMovieByTitle(title);
+            	movies = moviesDao.getMoviesByTitle(title);
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);
@@ -67,7 +67,7 @@ public class findMovies extends HttpServlet {
             messages.put("success", "Please enter a valid name.");
         } else {
         	try {
-            	movies = MoviesDao.getInstance().getMovieByTitle(title);
+            	movies = moviesDao.getMoviesByTitle(title);
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);

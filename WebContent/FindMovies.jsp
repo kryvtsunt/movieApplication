@@ -40,8 +40,8 @@
                     <td><c:out value="${movie.getTitle()}" /></td>
                     <td><c:out value="${movie.getReleaseYear()}"  /></td>
                     <td><c:out value="${movie.getRuntime()}" /></td>
-                    <td><a href="userdelete?username=<c:out value="${movie.getMovieId()}"/>">Delete</a></td>
-                    <td><a href="userupdate?username=<c:out value="${movie.getMovieId()}"/>">Update</a></td>
+                    <td><a href="moviedelete?movieId=<c:out value="${movie.getMovieId()}"/>">Delete</a></td>
+                    <td><a href="movieupdate?movieId=<c:out value="${movie.getMovieId()}"/>">Update</a></td>
                 </tr>
             </c:forEach>
        </table>

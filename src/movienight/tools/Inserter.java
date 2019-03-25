@@ -26,7 +26,7 @@ public class Inserter {
 		
 
 		// READ
-		Movies m1 = moviesDao.getMovieByTitle("Title A").get(0);
+		Movies m1 = moviesDao.getMoviesByTitle("Title A").get(0);
 		System.out.format("Reading movie: id:%s, title:%s, releaseYear:%s, runtime:%s\n",
 			m1.getMovieId(), m1.getTitle(), m1.getReleaseYear(), m1.getRuntime());
 		

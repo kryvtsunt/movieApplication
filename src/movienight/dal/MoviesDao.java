@@ -63,8 +63,6 @@ public class MoviesDao {
 		}
 	}
 
-
-
 	public Movies getMovieById(int movieId) throws SQLException {
 		String selectMovie = "SELECT * FROM Movie WHERE MovieId=?;";
 		Connection connection = null;
@@ -77,7 +75,7 @@ public class MoviesDao {
 			results = selectStmt.executeQuery();
 			if(results.next()) {
 				String title = results.getString("Title");
-				int releaseYear = results.getInt("RelaseYear");
+				int releaseYear = results.getInt("ReleaseYear");
 				int runtime = results.getInt("Runtime");
 				Movies movie = new Movies(movieId, title, releaseYear, runtime);
 				return movie;
@@ -148,23 +146,24 @@ public class MoviesDao {
 		}
 	}
 	
-	public List<Movies> getMovieByTitle(String title) throws SQLException {
+	public List<Movies> getMoviesByTitle(String title) throws SQLException {
 		List<Movies> movies = new ArrayList<Movies>();
-		String selectperson =
-			"SELECT * FROM Movie WHERE Title=?;";
+		String selectMovies =
+			"SELECT * FROM Movie WHERE Title LIKE ?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
 		try {
 			connection = connectionManager.getConnection();
-			selectStmt = connection.prepareStatement(selectperson);
-			selectStmt.setString(1, title);
+			selectStmt = connection.prepareStatement(selectMovies);
+			selectStmt.setString(1, "%" + title + "%");
 			results = selectStmt.executeQuery();
 			while(results.next()) {
 				int movieId = results.getInt("MovieId");
+				String resultTitle = results.getString("Title");
 				int releaseYear = results.getInt("ReleaseYear");
 				int runtime = results.getInt("Runtime");
-				Movies movie = new Movies(movieId, title, releaseYear, runtime);
+				Movies movie = new Movies(movieId, resultTitle, releaseYear, runtime);
 				movies.add(movie);
 			}
 		} catch (SQLException e) {
