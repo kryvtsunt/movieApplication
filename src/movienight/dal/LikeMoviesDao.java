@@ -105,7 +105,7 @@ public class LikeMoviesDao {
 	 */
 	public LikeMovies getLikeMovieById(int likeMovieId) throws SQLException {
 		String selectLikeMovie =
-			"SELECT LikeMovieId,UserName,PostId " +
+			"SELECT LikeMovieId,MovieId,UserName" +
 			"FROM LikeMovies " +
 			"WHERE LikeMovieId=?;";
 		Connection connection = null;
@@ -120,11 +120,11 @@ public class LikeMoviesDao {
 			MoviesDao moviesDao = MoviesDao.getInstance();
 			if(results.next()) {
 				int resultLikeMovieId = results.getInt("LikeMovieId");
-				String userName = results.getString("UserName");
 				int movieId = results.getInt("MovieId");
+				String userName = results.getString("UserName");
 				
-				Users user = usersDao.getUserFromUserName(userName);
 				Movies movie = moviesDao.getMovieById(movieId);
+				Users user = usersDao.getUserFromUserName(userName);
 				LikeMovies likeMovie = new LikeMovies(resultLikeMovieId, movie, user);
 				return likeMovie;
 			}
@@ -151,7 +151,7 @@ public class LikeMoviesDao {
 	public List<LikeMovies> getLikeMoviesForUser(Users user) throws SQLException {
 		List<LikeMovies> likeMovies = new ArrayList<LikeMovies>();
 		String selectLikeMovies =
-			"SELECT LikeMovieId,UserName,PostId" +
+			"SELECT LikeMovieId,MovieId,UserName" +
 			"FROM LikeMovies" + 
 			"WHERE UserName=?;";
 		Connection connection = null;
@@ -188,3 +188,4 @@ public class LikeMoviesDao {
 		return likeMovies;
 	}
 }
+
