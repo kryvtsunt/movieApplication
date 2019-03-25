@@ -97,7 +97,7 @@ public class WishListMoviesDao {
 
 	public WishListMovies getWishListMovieById(int wishListMovieId) throws SQLException {
 		String selectWishListMovie =
-			"SELECT WishListMovieId,UserName,PostId " +
+			"SELECT WishListMovieId,MovieId,UserName" +
 			"FROM WishListMovies " +
 			"WHERE WishListMovieId=?;";
 		Connection connection = null;
@@ -112,11 +112,11 @@ public class WishListMoviesDao {
 			MoviesDao moviesDao = MoviesDao.getInstance();
 			if(results.next()) {
 				int resultWishListMovieId = results.getInt("WishListMovieId");
-				String userName = results.getString("UserName");
 				int movieId = results.getInt("MovieId");
+				String userName = results.getString("UserName");
 				
-				Users user = usersDao.getUserFromUserName(userName);
 				Movies movie = moviesDao.getMovieById(movieId);
+				Users user = usersDao.getUserFromUserName(userName);
 				WishListMovies wishListMovie = new WishListMovies(resultWishListMovieId, movie, user);
 				return wishListMovie;
 			}
@@ -143,7 +143,7 @@ public class WishListMoviesDao {
 	public List<WishListMovies> getWishListMoviesForUser(Users user) throws SQLException {
 		List<WishListMovies> wishListMovies = new ArrayList<WishListMovies>();
 		String selectWishListMovies =
-			"SELECT WishListMovieId,UserName,PostId" +
+			"SELECT WishListMovieId,MovieId,UserName" +
 			"FROM WishListMovies" + 
 			"WHERE UserName=?;";
 		Connection connection = null;
