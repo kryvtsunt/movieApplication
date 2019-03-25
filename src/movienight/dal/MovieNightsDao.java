@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import movienight.model.*;
 
@@ -100,6 +102,41 @@ public class MovieNightsDao {
 			}
 		}
 		return null;
+	}
+	
+	public List<MovieNights> getMovieNightByDate(Date date) throws SQLException {
+		List<MovieNights> movieNights = new ArrayList<MovieNights>();
+		String selectMovieNight = "SELECT * FROM MovieNights WHERE Date=?;";
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectMovieNight);
+			selectStmt.setDate(1, date);
+			results = selectStmt.executeQuery();
+			while(results.next()) {
+				int moveiNightId = results.getInt("MovieNightId");
+				int movieId = results.getInt("MovieId");
+				Movies movie = MoviesDao.getInstance().getMovieById(movieId);
+				MovieNights movienight = new MovieNights(moveiNightId, date, movie);
+				movieNights.add(movienight);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(selectStmt != null) {
+				selectStmt.close();
+			}
+			if(results != null) {
+				results.close();
+			}
+		}
+		return movieNights;
 	}
 	
 	
