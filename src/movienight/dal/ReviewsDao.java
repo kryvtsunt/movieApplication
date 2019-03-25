@@ -83,6 +83,42 @@ public class ReviewsDao {
 		}
 	}
 	
+	/**
+	 * Update the content of the Reviews instance.
+	 * This runs a UPDATE statement.
+	 */
+	public Reviews updateContent(Reviews review, String newContent) throws SQLException {
+		String updateReview = "UPDATE Reviews SET Content=?,Created=? WHERE ReviewId=?;";
+		Connection connection = null;
+		PreparedStatement updateStmt = null;
+		try {
+			connection = connectionManager.getConnection();
+			updateStmt = connection.prepareStatement(updateReview);
+			updateStmt.setString(1, newContent);
+			// Sets the Created timestamp to the current time.
+			Date newCreatedTimestamp = new Date();
+			updateStmt.setTimestamp(2, new Timestamp(newCreatedTimestamp.getTime()));
+			updateStmt.setInt(3, review.getReviewId());
+			updateStmt.executeUpdate();
+
+			// Update the blogPost param before returning to the caller.
+			review.setContent(newContent);
+			review.setCreated(newCreatedTimestamp);
+			return review;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(updateStmt != null) {
+				updateStmt.close();
+			}
+		}
+	}
+
+	
 	public Reviews delete(Reviews review) throws SQLException {
 		String deleteReview = "DELETE FROM Reviews WHERE ReviewId=?;";
 		Connection connection = null;
