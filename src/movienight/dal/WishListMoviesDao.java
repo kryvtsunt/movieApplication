@@ -157,7 +157,6 @@ public class WishListMoviesDao {
 			MoviesDao moviesDao = MoviesDao.getInstance();
 			while(results.next()) {
 				int wishListMovieId = results.getInt("WishListMovieId");
-				String userName = results.getString("UserName");
 				int movieId = results.getInt("MovieId");
 				
 				Movies movie = moviesDao.getMovieById(movieId);
