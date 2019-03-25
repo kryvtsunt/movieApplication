@@ -97,7 +97,7 @@ public class WatchedMoviesDao {
 
 	public WatchedMovies getWatchedMovieById(int watchedMovieId) throws SQLException {
 		String selectWatchedMovie =
-			"SELECT WatchedMovieId,UserName,PostId " +
+			"SELECT WatchedMovieId,MovieId,UserId " +
 			"FROM WatchedMovies " +
 			"WHERE WatchedMovieId=?;";
 		Connection connection = null;
@@ -112,11 +112,11 @@ public class WatchedMoviesDao {
 			MoviesDao moviesDao = MoviesDao.getInstance();
 			if(results.next()) {
 				int resultWatchedMovieId = results.getInt("WatchedMovieId");
-				String userName = results.getString("UserName");
 				int movieId = results.getInt("MovieId");
-				
-				Users user = usersDao.getUserFromUserName(userName);
+				String userName = results.getString("UserName");
+
 				Movies movie = moviesDao.getMovieById(movieId);
+				Users user = usersDao.getUserFromUserName(userName);
 				WatchedMovies watchedMovie = new WatchedMovies(resultWatchedMovieId, movie, user);
 				return watchedMovie;
 			}
@@ -143,7 +143,7 @@ public class WatchedMoviesDao {
 	public List<WatchedMovies> getWatchedMoviesForUser(Users user) throws SQLException {
 		List<WatchedMovies> watchedMovies = new ArrayList<WatchedMovies>();
 		String selectWatchedMovies =
-			"SELECT WatchedMovieId,UserName,PostId" +
+			"SELECT WatchedMovieId,MovieId,UserName" +
 			"FROM WatchedMovies" + 
 			"WHERE UserName=?;";
 		Connection connection = null;
@@ -180,3 +180,4 @@ public class WatchedMoviesDao {
 		return watchedMovies;
 	}
 }
+
