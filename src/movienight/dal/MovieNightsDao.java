@@ -38,7 +38,7 @@ public class MovieNightsDao {
 				return null;
 			}
 			insertStmt = connection.prepareStatement(insertMovieNight, Statement.RETURN_GENERATED_KEYS);
-			insertStmt.setDate(1, movieNight.getDate());
+			insertStmt.setDate(1, new Date(movieNight.getDate().getTime()));
 			insertStmt.setInt(2, movieNight.getMovie().getMovieId());
 			insertStmt.executeUpdate();
 			resultKey = insertStmt.getGeneratedKeys();

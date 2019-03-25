@@ -137,71 +137,71 @@ CREATE TABLE Reviews (
 	CONSTRAINT fk_Reviews_UserName FOREIGN KEY (UserName) REFERENCES Users(UserName) ON UPDATE CASCADE ON DELETE SET NULL,
 	CONSTRAINT fk_Reviews_MovieId FOREIGN KEY (MovieId) REFERENCES Movies(MovieId) ON UPDATE CASCADE ON DELETE CASCADE);
     
-INSERT INTO Users(UserName, Password, FirstName, LastName, Email, Phone) 
-VALUES
-	('Tim', 'pass', 'Tymoii', 'Kryvtsun', 'kryvtsun.t@husky.neu.edu', '6179010901'),
-	('ValCharry','pass', 'Valerie', 'Charry', 'charry.v@husky.neu.edu', '6173409122'),
-	('OliveDang','pass', 'Olivia', 'D\'Angelo', 'dangelo.ol@husky.neu.edu', '8609183325'),
-	('Pembers67','pass', 'Pemberton', 'Harry', 'harry.pemberton@aol.com', '6473929976'),
-	('lardude09','pass', 'Larry', 'James', 'larryj@gmail.com', '9387368392'),
-    ('user1','pass', NULL, NULL, 'user@email.com', NULL),
-    ('Olivia','pass', NULL, NULL, 'olivia@email.com', NULL);
-    
-INSERT INTO Genres(GenreId, Name) 
-Values (1,'Drama'),(2,'Comedy'),(3,'Action'),(4,'Adventure'),(5,'Music'),(6,'Horror'),(7, 'Mystery'),(8,'Documentary'),(9,'Romance');
+-- INSERT INTO Users(UserName, Password, FirstName, LastName, Email, Phone) 
+-- VALUES
+-- 	('Tim', 'pass', 'Tymoii', 'Kryvtsun', 'kryvtsun.t@husky.neu.edu', '6179010901'),
+-- 	('ValCharry','pass', 'Valerie', 'Charry', 'charry.v@husky.neu.edu', '6173409122'),
+-- 	('OliveDang','pass', 'Olivia', 'D\'Angelo', 'dangelo.ol@husky.neu.edu', '8609183325'),
+-- 	('Pembers67','pass', 'Pemberton', 'Harry', 'harry.pemberton@aol.com', '6473929976'),
+-- 	('lardude09','pass', 'Larry', 'James', 'larryj@gmail.com', '9387368392'),
+--     ('user1','pass', NULL, NULL, 'user@email.com', NULL),
+--     ('Olivia','pass', NULL, NULL, 'olivia@email.com', NULL);
+--     
+-- INSERT INTO Genres(GenreId, Name) 
+-- Values (1,'Drama'),(2,'Comedy'),(3,'Action'),(4,'Adventure'),(5,'Music'),(6,'Horror'),(7, 'Mystery'),(8,'Documentary'),(9,'Romance');
 
-INSERT INTO Movies(MovieId, Title, ReleaseYear, Runtime)
-VALUES
-	(1, "Captain America: The First Avenger", 2011, 124),
-    (2, "Captain America: The Winter Soldier", 2014, 136),
-    (3, "Iron Man", 2008, 126),
-    (4, "Lego Movie", 2014, 101),
-    (5, "Halloween", 1970, 110);
+-- INSERT INTO Movies(MovieId, Title, ReleaseYear, Runtime)
+-- VALUES
+-- 	(1, "Captain America: The First Avenger", 2011, 124),
+--     (2, "Captain America: The Winter Soldier", 2014, 136),
+--     (3, "Iron Man", 2008, 126),
+--     (4, "Lego Movie", 2014, 101),
+--     (5, "Halloween", 1970, 110);
 
-INSERT INTO MovieGenres(GenreId, MovieId)
-VALUES
-	(3, 1), (3, 2), (3, 3), (3, 4), (4, 1), (4, 2), (4, 3), (4, 4), (6, 5);
-    
-INSERT INTO MovieNights(MovieNightId, MovieId, Date) 
-VALUES
-	(1, 1, '2019-02-08'),
-	(2, 4, '2019-03-28');
+-- INSERT INTO MovieGenres(GenreId, MovieId)
+-- VALUES
+-- 	(3, 1), (3, 2), (3, 3), (3, 4), (4, 1), (4, 2), (4, 3), (4, 4), (6, 5);
+--     
+-- INSERT INTO MovieNights(MovieNightId, MovieId, Date) 
+-- VALUES
+-- 	(1, 1, '2019-02-08'),
+-- 	(2, 4, '2019-03-28');
 
-INSERT INTO Attendances(MovieNightId, UserName, AttendanceType)
-VALUES
-	(1, 'Tim', 'Host'),
-    (1, 'user1', 'Attendee'),
-    (1, 'ValCharry', 'Attendee');
-    
-INSERT INTO Reviews(Created, Content, Rating, UserName, MovieId) 
-VALUES
-	('2019-02-01', 'It was okay. Tooooo scary at some parts.', '6', 'Olivia', 2),
-    ('2019-02-08', 'Great action! Solid overall.', '8', 'Tim', 1);
-    
-INSERT INTO Persons(PersonId, FirstName, LastName)
-VALUES
-	('1', 'Joe', 'Russo'),
-    ('2', 'Anthony', 'Russo');
+-- INSERT INTO Attendances(MovieNightId, UserName, AttendanceType)
+-- VALUES
+-- 	(1, 'Tim', 'Host'),
+--     (1, 'user1', 'Attendee'),
+--     (1, 'ValCharry', 'Attendee');
+--     
+-- INSERT INTO Reviews(Created, Content, Rating, UserName, MovieId) 
+-- VALUES
+-- 	('2019-02-01', 'It was okay. Tooooo scary at some parts.', '6', 'Olivia', 2),
+--     ('2019-02-08', 'Great action! Solid overall.', '8', 'Tim', 1);
+--     
+-- INSERT INTO Persons(PersonId, FirstName, LastName)
+-- VALUES
+-- 	('1', 'Joe', 'Russo'),
+--     ('2', 'Anthony', 'Russo');
 
-INSERT INTO Casts(MovieId, PersonId, Role)
-VALUES
-	(2, 1, 'Director'),
-    (2, 2, 'Director');
+-- INSERT INTO Casts(MovieId, PersonId, Role)
+-- VALUES
+-- 	(2, 1, 'Director'),
+--     (2, 2, 'Director');
 
-INSERT INTO LikeMovies(MovieId, UserName)
-VALUES 
-	(1, 'ValCharry'),
-    (2, 'ValCharry'),
-    (3, 'ValCharry'),
-    (4, 'ValCharry'),
-    (2, 'Tim'),
-    (3, 'Tim'),
-    (1, NULL),(1, NULL),(1, NULL),(1, NULL);
+-- INSERT INTO LikeMovies(MovieId, UserName)
+-- VALUES 
+-- 	(1, 'ValCharry'),
+--     (2, 'ValCharry'),
+--     (3, 'ValCharry'),
+--     (4, 'ValCharry'),
+--     (2, 'Tim'),
+--     (3, 'Tim'),
+--     (1, NULL),(1, NULL),(1, NULL),(1, NULL);
 
-INSERT INTO WatchedMovies(MovieId, UserName)
-VALUES
-	(1, 'Tim'),
-    (1, 'ValCharry'),
-    (2, 'Tim'),
-    (2, 'Olivia');
+-- INSERT INTO WatchedMovies(MovieId, UserName)
+-- VALUES
+-- 	(1, 'Tim'),
+--     (1, 'ValCharry'),
+--     (2, 'Tim'),
+--     (2, 'Olivia');
 
