@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -82,7 +81,6 @@ public class LikeMoviesDao {
 			deleteStmt.setInt(1, likeMovie.getLikeMovieId());
 			deleteStmt.executeUpdate();
 
-			// Return null so the caller can no longer operate on the Persons instance.
 			return null;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -167,7 +165,6 @@ public class LikeMoviesDao {
 			MoviesDao moviesDao = MoviesDao.getInstance();
 			while(results.next()) {
 				int likeMovieId = results.getInt("LikeMovieId");
-				String userName = results.getString("UserName");
 				int movieId = results.getInt("MovieId");
 				
 				Movies movie = moviesDao.getMovieById(movieId);
