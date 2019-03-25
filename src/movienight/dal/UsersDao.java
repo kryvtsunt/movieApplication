@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -36,7 +38,7 @@ public class UsersDao {
 	 * This runs a INSERT statement.
 	 */
 	public Users create(Users user) throws SQLException {
-		String insertUser = "INSERT INTO Users(UserName,Password,FirstName,LastName,Email,Phone) VALUES(?,?,?,?,?,?);";
+		String insertUser = "INSERT INTO User(UserName,Password,FirstName,LastName,Email,Phone) VALUES(?,?,?,?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		try {
@@ -77,7 +79,7 @@ public class UsersDao {
 	
 
 	public Users delete(Users user) throws SQLException {
-		String deleteUser = "DELETE FROM Users WHERE UserName=?;";
+		String deleteUser = "DELETE FROM User WHERE UserName=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
 		try {
@@ -102,7 +104,7 @@ public class UsersDao {
 	
 
 	public Users getUserFromUserName(String userName) throws SQLException {
-		String selectUser = "SELECT UserName,Password,FirstName,LastName,Email,Phone FROM Users WHERE UserName=?;";
+		String selectUser = "SELECT UserName,Password,FirstName,LastName,Email,Phone FROM User WHERE UserName=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
@@ -140,6 +142,75 @@ public class UsersDao {
 		}
 		return null;
 	}
+	
 
+	public Users updateEmail(Users user, String newEmail) throws SQLException {
+		String updateUser = "UPDATE User SET Email=? WHERE UserName=?;";
+		Connection connection = null;
+		PreparedStatement updateStmt = null;
 
+		try {
+			connection = connectionManager.getConnection();
+			updateStmt = connection.prepareStatement(updateUser);
+			updateStmt.setString(1, newEmail);
+			updateStmt.setString(2, user.getUserName());
+			updateStmt.executeUpdate();
+			
+			// Update the user's param before returning to the caller.
+			user.setEmail(newEmail);
+			return user;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(updateStmt != null) {
+				updateStmt.close();
+			}
+		}
+
+	}
+
+	public List<Users> getUsersFromFirstName(String firstName) throws SQLException {
+		List<Users> users = new ArrayList<Users>();
+		String selectUser = "SELECT * FROM User WHERE FirstName LIKE ?;";
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectUser);
+			selectStmt.setString(1, "%" + firstName + "%");
+	
+			results = selectStmt.executeQuery();
+			
+			while(results.next()) {
+
+				String userName = results.getString("UserName");
+				String password = results.getString("Password");
+				String resultFirstName = results.getString("FirstName");
+				String lastName = results.getString("LastName");
+				String email = results.getString("Email");
+				String phone = results.getString("Phone");
+				Users user = new Users(userName, password, resultFirstName, lastName, email, phone);
+				users.add(user);
+			} 
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(selectStmt != null) {
+				selectStmt.close();
+			}
+			if(results != null) {
+				results.close();
+			}
+		}
+		return users;
+	}
 }
