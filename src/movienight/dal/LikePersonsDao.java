@@ -99,7 +99,7 @@ public class LikePersonsDao {
 
 	public LikePersons getLikePersonById(int likePersonId) throws SQLException {
 		String selectLikePerson =
-			"SELECT LikePersonId,UserName,PostId " +
+			"SELECT LikePersonId, PersonId, UserName " +
 			"FROM LikePersons " +
 			"WHERE LikePersonId=?;";
 		Connection connection = null;
@@ -114,11 +114,11 @@ public class LikePersonsDao {
 			PersonsDao personsDao = PersonsDao.getInstance();
 			if(results.next()) {
 				int resultLikePersonId = results.getInt("LikePersonId");
-				String userName = results.getString("UserName");
 				int personId = results.getInt("PersonId");
+				String userName = results.getString("UserName");
 				
-				Users user = usersDao.getUserFromUserName(userName);
 				Persons person = personsDao.getPersonById(personId);
+				Users user = usersDao.getUserFromUserName(userName);
 				LikePersons likePerson = new LikePersons(resultLikePersonId, person, user);
 				return likePerson;
 			}
@@ -145,7 +145,7 @@ public class LikePersonsDao {
 	public List<LikePersons> getLikePersonsForUser(Users user) throws SQLException {
 		List<LikePersons> likePersons = new ArrayList<LikePersons>();
 		String selectLikePersons =
-			"SELECT LikePersonId,UserName,PostId" +
+			"SELECT LikePersonId, MovieId, UserName" +
 			"FROM LikePersons" + 
 			"WHERE UserName=?;";
 		Connection connection = null;
