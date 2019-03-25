@@ -29,7 +29,7 @@ public class LikeMoviesDao {
 	public LikeMovies create(LikeMovies likeMovie) throws SQLException {
 		String insertLikeMovie =
 			"INSERT INTO LikeMovies(MovieId,UserName) " +
-			"VALUES(?,?,?);";
+			"VALUES(?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;

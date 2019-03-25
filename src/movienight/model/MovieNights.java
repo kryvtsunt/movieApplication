@@ -1,6 +1,6 @@
 package movienight.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class MovieNights {
 	protected int movieNightId;
