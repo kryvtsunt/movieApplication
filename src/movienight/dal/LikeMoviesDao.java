@@ -28,7 +28,7 @@ public class LikeMoviesDao {
 
 	public LikeMovies create(LikeMovies likeMovie) throws SQLException {
 		String insertLikeMovie =
-			"INSERT INTO LikeMovies(movie,user) " +
+			"INSERT INTO LikeMovies(MovieId,UserName) " +
 			"VALUES(?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
@@ -105,7 +105,7 @@ public class LikeMoviesDao {
 	 */
 	public LikeMovies getLikeMovieById(int likeMovieId) throws SQLException {
 		String selectLikeMovie =
-			"SELECT LikeMovieId,MovieId,UserName" +
+			"SELECT LikeMovieId,MovieId,UserName " +
 			"FROM LikeMovies " +
 			"WHERE LikeMovieId=?;";
 		Connection connection = null;
@@ -151,8 +151,8 @@ public class LikeMoviesDao {
 	public List<LikeMovies> getLikeMoviesForUser(Users user) throws SQLException {
 		List<LikeMovies> likeMovies = new ArrayList<LikeMovies>();
 		String selectLikeMovies =
-			"SELECT LikeMovieId,MovieId,UserName" +
-			"FROM LikeMovies" + 
+			"SELECT LikeMovieId,MovieId,UserName " +
+			"FROM LikeMovies " + 
 			"WHERE UserName=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;

@@ -28,8 +28,8 @@ public class WatchedMoviesDao {
 
 	public WatchedMovies create(WatchedMovies watchedMovie) throws SQLException {
 		String insertWatchedMovie =
-			"INSERT INTO WatchedMovies(movie,user) " +
-			"VALUES(?,?,?);";
+			"INSERT INTO WatchedMovies(MovieId,UserName) " +
+			"VALUES(?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;
@@ -143,8 +143,8 @@ public class WatchedMoviesDao {
 	public List<WatchedMovies> getWatchedMoviesForUser(Users user) throws SQLException {
 		List<WatchedMovies> watchedMovies = new ArrayList<WatchedMovies>();
 		String selectWatchedMovies =
-			"SELECT WatchedMovieId,MovieId,UserName" +
-			"FROM WatchedMovies" + 
+			"SELECT WatchedMovieId,MovieId,UserName " +
+			"FROM WatchedMovies " + 
 			"WHERE UserName=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;

@@ -28,7 +28,7 @@ public class MovieGenresDao {
 	}
 
 	public MovieGenres create(MovieGenres movieGenre) throws SQLException {
-		String insertMovieGenre = "INSERT INTO MovieGenre(MovieId, GenreId) VALUES(?,?);";
+		String insertMovieGenre = "INSERT INTO MovieGenres(MovieId, GenreId) VALUES(?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;		
@@ -70,7 +70,7 @@ public class MovieGenresDao {
 	}
 
 	public MovieGenres delete(MovieGenres movieGenre) throws SQLException {
-		String deleteMovieGenre = "DELETE FROM MovieGenre WHERE MovieGenreId=?;";
+		String deleteMovieGenre = "DELETE FROM MovieGenres WHERE MovieGenreId=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
 		try {
@@ -94,7 +94,7 @@ public class MovieGenresDao {
 
 
 	public MovieGenres getMovieGenreById(int movieGenreId) throws SQLException {
-		String selectMovieGenre = "SELECT * FROM MovieGenre WHERE MovieGenreId=?;";
+		String selectMovieGenre = "SELECT * FROM MovieGenres WHERE MovieGenreId=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;

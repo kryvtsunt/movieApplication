@@ -156,7 +156,7 @@ public class AttendancesDao {
 	 */
 	public Attendances getBlogAttendanceById(int attendanceId) throws SQLException {
 		String selectAttendance =
-			"SELECT AttendanceId,MovieNightId,UserName,AttendanceType" +
+			"SELECT AttendanceId,MovieNightId,UserName,AttendanceType " +
 			"FROM Attendances " +
 			"WHERE AttendanceId=?;";
 		Connection connection = null;
@@ -205,7 +205,7 @@ public class AttendancesDao {
 	public List<Attendances> getBlogPostsForUser(Users user) throws SQLException {
 		List<Attendances> attendances = new ArrayList<Attendances>();
 		String selectAttendances =
-			"SELECT AttendanceId,MovieNightId,UserName,AttendanceType" +
+			"SELECT AttendanceId,MovieNightId,UserName,AttendanceType " +
 			"FROM Attendances " +
 			"WHERE UserName=?;";
 		Connection connection = null;

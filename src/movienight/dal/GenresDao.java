@@ -28,7 +28,7 @@ public class GenresDao {
 	}
 
 	public Genres create(Genres genre) throws SQLException {
-		String insertgenre = "INSERT INTO Genre(Name) VALUES(?);";
+		String insertgenre = "INSERT INTO Genres(Name) VALUES(?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;		
@@ -63,7 +63,7 @@ public class GenresDao {
 	}
 
 	public Genres updateName(Genres genre, String newName) throws SQLException {
-		String updategenre = "UPDATE genre SET Name=? WHERE genreId=?;";
+		String updategenre = "UPDATE Genres SET Name=? WHERE GenreId=?;";
 		Connection connection = null;
 		PreparedStatement updateStmt = null;
 		try {
@@ -88,7 +88,7 @@ public class GenresDao {
 	}
 
 	public Genres delete(Genres genre) throws SQLException {
-		String deletegenre = "DELETE FROM genre WHERE genreId=?;";
+		String deletegenre = "DELETE FROM Genres WHERE GenreId=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
 		try {
@@ -112,7 +112,7 @@ public class GenresDao {
 
 
 	public Genres getGenreById(int genreId) throws SQLException {
-		String selectgenre = "SELECT * FROM genre WHERE genreId=?;";
+		String selectgenre = "SELECT * FROM Genres WHERE GenreId=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;

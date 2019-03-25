@@ -28,7 +28,7 @@ public class LikePersonsDao {
 
 	public LikePersons create(LikePersons likePerson) throws SQLException {
 		String insertLikePerson =
-			"INSERT INTO LikePerson(PersonId,UserName) " +
+			"INSERT INTO LikePersons(PersonId,UserName) " +
 			"VALUES(?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
@@ -72,7 +72,7 @@ public class LikePersonsDao {
 	 * This runs a DELETE statement.
 	 */
 	public LikePersons delete(LikePersons likePerson) throws SQLException {
-		String deleteLikePerson = "DELETE FROM LikePerson WHERE LikePersonId=?;";
+		String deleteLikePerson = "DELETE FROM LikePersons WHERE LikePersonId=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
 		try {
@@ -100,7 +100,7 @@ public class LikePersonsDao {
 	public LikePersons getLikePersonById(int likePersonId) throws SQLException {
 		String selectLikePerson =
 			"SELECT LikePersonId,UserName,PersonId " +
-			"FROM LikePerson " +
+			"FROM LikePersons " +
 			"WHERE LikePersonId=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
@@ -146,7 +146,7 @@ public class LikePersonsDao {
 		List<LikePersons> likePersons = new ArrayList<LikePersons>();
 		String selectLikePersons =
 			"SELECT LikePersonId,UserName,PersonId " +
-			"FROM LikePerson " + 
+			"FROM LikePersons " + 
 			"WHERE UserName=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
@@ -189,7 +189,7 @@ public class LikePersonsDao {
 		List<LikePersons> likePersons = new ArrayList<LikePersons>();
 		String selectLikePersons =
 			"SELECT LikePersonId,UserName,PersonId " +
-			"FROM LikePerson " + 
+			"FROM LikePersons " + 
 			"WHERE PersonId=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;

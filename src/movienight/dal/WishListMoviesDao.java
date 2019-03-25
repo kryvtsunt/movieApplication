@@ -28,8 +28,8 @@ public class WishListMoviesDao {
 
 	public WishListMovies create(WishListMovies wishListMovie) throws SQLException {
 		String insertWishListMovie =
-			"INSERT INTO WishListMovies(movie,user) " +
-			"VALUES(?,?,?);";
+			"INSERT INTO WishListMovies(MovieId,UserName) " +
+			"VALUES(?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;
@@ -72,7 +72,7 @@ public class WishListMoviesDao {
 	 * This runs a DELETE statement.
 	 */
 	public WishListMovies delete(WishListMovies wishListMovie) throws SQLException {
-		String deleteWishListMovie = "DELETE FROM WishListMovies WHERE wishListMovieId=?;";
+		String deleteWishListMovie = "DELETE FROM WishListMovies WHERE WishListMovieId=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
 		try {
@@ -97,7 +97,7 @@ public class WishListMoviesDao {
 
 	public WishListMovies getWishListMovieById(int wishListMovieId) throws SQLException {
 		String selectWishListMovie =
-			"SELECT WishListMovieId,MovieId,UserName" +
+			"SELECT WishListMovieId,MovieId,UserName " +
 			"FROM WishListMovies " +
 			"WHERE WishListMovieId=?;";
 		Connection connection = null;
@@ -143,8 +143,8 @@ public class WishListMoviesDao {
 	public List<WishListMovies> getWishListMoviesForUser(Users user) throws SQLException {
 		List<WishListMovies> wishListMovies = new ArrayList<WishListMovies>();
 		String selectWishListMovies =
-			"SELECT WishListMovieId,MovieId,UserName" +
-			"FROM WishListMovies" + 
+			"SELECT WishListMovieId,MovieId,UserName " +
+			"FROM WishListMovies " + 
 			"WHERE UserName=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;

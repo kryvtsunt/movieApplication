@@ -28,7 +28,7 @@ public class PersonsDao {
 	}
 
 	public Persons create(Persons person) throws SQLException {
-		String insertPerson = "INSERT INTO Person(FirstName,LastName, DateOfBirth) VALUES(?,?,?);";
+		String insertPerson = "INSERT INTO Persons(FirstName,LastName, DateOfBirth) VALUES(?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;		
@@ -65,7 +65,7 @@ public class PersonsDao {
 	}
 
 	public Persons updateLastName(Persons person, String newLastName) throws SQLException {
-		String updatePerson = "UPDATE person SET LastName=? WHERE PersonId=?;";
+		String updatePerson = "UPDATE Persons SET LastName=? WHERE PersonId=?;";
 		Connection connection = null;
 		PreparedStatement updateStmt = null;
 		try {
@@ -90,7 +90,7 @@ public class PersonsDao {
 	}
 
 	public Persons delete(Persons person) throws SQLException {
-		String deletePerson = "DELETE FROM person WHERE PersonId=?;";
+		String deletePerson = "DELETE FROM Persons WHERE PersonId=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
 		try {
@@ -114,7 +114,7 @@ public class PersonsDao {
 
 
 	public Persons getPersonById(int personId) throws SQLException {
-		String selectPerson = "SELECT * FROM Person WHERE PersonId=?;";
+		String selectPerson = "SELECT * FROM Persons WHERE PersonId=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
@@ -151,7 +151,7 @@ public class PersonsDao {
 	public List<Persons> getPersonsByFirstName(String firstName) throws SQLException {
 		List<Persons> persons = new ArrayList<Persons>();
 		String selectperson =
-			"SELECT * FROM Person WHERE FirstName=?;";
+			"SELECT * FROM Persons WHERE FirstName=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;

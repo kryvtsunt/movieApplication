@@ -25,7 +25,7 @@ public class MovieNightsDao {
 	}
 
 	public MovieNights create(MovieNights movieNight) throws SQLException {
-		String insertMovieNight = "INSERT INTO MovieNight(Date, MovieId) VALUES(?,?);";
+		String insertMovieNight = "INSERT INTO MovieNights(Date, MovieId) VALUES(?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;		
@@ -69,7 +69,7 @@ public class MovieNightsDao {
 
 
 	public MovieNights getMovieNightById(int movieNightId) throws SQLException {
-		String selectMovieNight = "SELECT * FROM MovieNight WHERE MovieNightId=?;";
+		String selectMovieNight = "SELECT * FROM MovieNights WHERE MovieNightId=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
@@ -104,7 +104,7 @@ public class MovieNightsDao {
 	
 	
 	public MovieNights delete(MovieNights movieNight) throws SQLException {
-		String deleteMovieNight = "DELETE FROM MovieNight WHERE MovieNightId=?;";
+		String deleteMovieNight = "DELETE FROM MovieNights WHERE MovieNightId=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
 		try {

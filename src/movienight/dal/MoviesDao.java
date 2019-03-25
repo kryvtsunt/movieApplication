@@ -27,7 +27,7 @@ public class MoviesDao {
 	}
 
 	public Movies create(Movies movie) throws SQLException {
-		String insertMovie = "INSERT INTO Movie(Title, ReleaseYear, Runtime) VALUES(?,?,?);";
+		String insertMovie = "INSERT INTO Movies(Title, ReleaseYear, Runtime) VALUES(?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;		
@@ -64,7 +64,7 @@ public class MoviesDao {
 	}
 
 	public Movies getMovieById(int movieId) throws SQLException {
-		String selectMovie = "SELECT * FROM Movie WHERE MovieId=?;";
+		String selectMovie = "SELECT * FROM Movies WHERE MovieId=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
@@ -99,7 +99,7 @@ public class MoviesDao {
 	
 	
 	public Movies delete(Movies movie) throws SQLException {
-		String deleteMovie = "DELETE FROM Movie WHERE MovieId=?;";
+		String deleteMovie = "DELETE FROM Movies WHERE MovieId=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
 		try {
@@ -122,7 +122,7 @@ public class MoviesDao {
 	}
 	
 	public Movies updateTitle(Movies movie, String title) throws SQLException {
-		String updateMovie = "UPDATE Movie SET Title=? WHERE MovieId=?;";
+		String updateMovie = "UPDATE Movies SET Title=? WHERE MovieId=?;";
 		Connection connection = null;
 		PreparedStatement updateStmt = null;
 		try {
@@ -149,7 +149,7 @@ public class MoviesDao {
 	public List<Movies> getMoviesByTitle(String title) throws SQLException {
 		List<Movies> movies = new ArrayList<Movies>();
 		String selectMovies =
-			"SELECT * FROM Movie WHERE Title LIKE ?;";
+			"SELECT * FROM Movies WHERE Title LIKE ?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
