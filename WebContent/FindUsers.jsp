@@ -29,10 +29,10 @@
 	<h1>Matching Users</h1>
         <table border="1">
             <tr>
-                <th>UserName</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>Attendances</th>
+                <th>Username</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Movie Nights</th>
                 <th>Reviews</th>
                 <th>Delete User</th>
                 <th>Update User</th>
@@ -42,7 +42,7 @@
                     <td><c:out value="${user.getUserName()}" /></td>
                     <td><c:out value="${user.getFirstName()}" /></td>
                     <td><c:out value="${user.getLastName()}" /></td>
-                    <td><a href="attendances?username=<c:out value="${user.getUserName()}"/>">Attendances</a></td>
+                    <td><a href="movienights?username=<c:out value="${user.getUserName()}"/>">Movie Nights</a></td>
                     <td><a href="reviews?username=<c:out value="${user.getUserName()}"/>">Reviews</a></td>
                     <td><a href="userdelete?username=<c:out value="${user.getUserName()}"/>">Delete</a></td>
                     <td><a href="userupdate?username=<c:out value="${user.getUserName()}"/>">Update</a></td>

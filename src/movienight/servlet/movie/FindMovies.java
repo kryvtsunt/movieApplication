@@ -1,4 +1,4 @@
-package movienight.servlet;
+package movienight.servlet.movie;
 
 import movienight.dal.MoviesDao;
 import movienight.model.Movies;

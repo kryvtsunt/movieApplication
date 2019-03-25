@@ -1,4 +1,4 @@
-package movienight.servlet;
+package movienight.servlet.movie;
 
 import movienight.dal.*;
 import movienight.model.*;

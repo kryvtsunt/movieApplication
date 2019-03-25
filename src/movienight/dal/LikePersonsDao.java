@@ -28,8 +28,8 @@ public class LikePersonsDao {
 
 	public LikePersons create(LikePersons likePerson) throws SQLException {
 		String insertLikePerson =
-			"INSERT INTO LikePersons(movie,user) " +
-			"VALUES(?,?,?);";
+			"INSERT INTO LikePerson(PersonId,UserName) " +
+			"VALUES(?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;
@@ -72,7 +72,7 @@ public class LikePersonsDao {
 	 * This runs a DELETE statement.
 	 */
 	public LikePersons delete(LikePersons likePerson) throws SQLException {
-		String deleteLikePerson = "DELETE FROM LikePersons WHERE LikePersonId=?;";
+		String deleteLikePerson = "DELETE FROM LikePerson WHERE LikePersonId=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
 		try {
@@ -99,8 +99,8 @@ public class LikePersonsDao {
 
 	public LikePersons getLikePersonById(int likePersonId) throws SQLException {
 		String selectLikePerson =
-			"SELECT LikePersonId, PersonId, UserName " +
-			"FROM LikePersons " +
+			"SELECT LikePersonId,UserName,PersonId " +
+			"FROM LikePerson " +
 			"WHERE LikePersonId=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
@@ -145,8 +145,8 @@ public class LikePersonsDao {
 	public List<LikePersons> getLikePersonsForUser(Users user) throws SQLException {
 		List<LikePersons> likePersons = new ArrayList<LikePersons>();
 		String selectLikePersons =
-			"SELECT LikePersonId, MovieId, UserName" +
-			"FROM LikePersons" + 
+			"SELECT LikePersonId,UserName,PersonId " +
+			"FROM LikePerson " + 
 			"WHERE UserName=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
@@ -160,7 +160,50 @@ public class LikePersonsDao {
 			while(results.next()) {
 				int personId = results.getInt("PersonId");
 				Persons person = personsDao.getPersonById(personId);
-				int likePersonId = results.getInt("LikeMovieId");
+				int likePersonId = results.getInt("LikePersonId");
+				
+				LikePersons likePerson = new LikePersons(likePersonId, person, user);
+				likePersons.add(likePerson);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(connection != null) {
+				connection.close();
+			}
+			if(selectStmt != null) {
+				selectStmt.close();
+			}
+			if(results != null) {
+				results.close();
+			}
+		}
+		return likePersons;
+	}
+	
+	/**
+	 * Get the all the LikePersons for a person.
+	 */
+	public List<LikePersons> getLikePersonsForPerson(Persons person) throws SQLException {
+		List<LikePersons> likePersons = new ArrayList<LikePersons>();
+		String selectLikePersons =
+			"SELECT LikePersonId,UserName,PersonId " +
+			"FROM LikePerson " + 
+			"WHERE PersonId=?;";
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectLikePersons);
+			selectStmt.setInt(1, person.getPersonId());
+			results = selectStmt.executeQuery();
+			UsersDao usersDao = UsersDao.getInstance();
+			while(results.next()) {
+				String userName = results.getString("UserName");
+				Users user = usersDao.getUserFromUserName(userName);
+				int likePersonId = results.getInt("LikePersonId");
 				
 				LikePersons likePerson = new LikePersons(likePersonId, person, user);
 				likePersons.add(likePerson);

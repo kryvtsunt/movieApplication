@@ -1,4 +1,4 @@
-package movienight.servlet;
+package movienight.servlet.person;
 
 import movienight.dal.*;
 import movienight.model.*;
@@ -18,14 +18,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/userdelete")
-public class UserDelete extends HttpServlet {
+@WebServlet("/persondelete")
+public class PersonDelete extends HttpServlet {
 	
-	protected UsersDao usersDao;
+	protected PersonsDao personsDao;
 	
 	@Override
 	public void init() throws ServletException {
-		usersDao = UsersDao.getInstance();
+		personsDao = PersonsDao.getInstance();
 	}
 	
 	@Override
@@ -35,8 +35,8 @@ public class UserDelete extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
         // Provide a title and render the JSP.
-        messages.put("title", "Delete User");        
-        req.getRequestDispatcher("/UserDelete.jsp").forward(req, resp);
+        messages.put("title", "Delete Person");        
+        req.getRequestDispatcher("/PersonDelete.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -47,29 +47,33 @@ public class UserDelete extends HttpServlet {
         req.setAttribute("messages", messages);
 
         // Retrieve and validate name.
-        String userName = req.getParameter("username");
-        if (userName == null || userName.trim().isEmpty()) {
-            messages.put("title", "Invalid UserName");
+        String personIdStr = req.getParameter("personId");
+        if (personIdStr == null || personIdStr.trim().isEmpty()) {
+            messages.put("title", "Invalid PersonId");
             messages.put("disableSubmit", "true");
         } else {
-        	// Delete the User.
-	        Users user = new Users(userName);
-	        try {
-	        	user = usersDao.delete(user);
-	        	// Update the message.
-		        if (user == null) {
-		            messages.put("title", "Successfully deleted " + userName);
+        	// Delete the Person.
+        	try {
+        		int personId = Integer.parseInt(personIdStr);
+        		Persons person = new Persons(personId);
+        		person = personsDao.delete(person);
+        		// Update the message.
+		        if (person == null) {
+		            messages.put("title", "Successfully deleted " + personId);
 		            messages.put("disableSubmit", "true");
 		        } else {
-		        	messages.put("title", "Failed to delete " + userName);
+		        	messages.put("title", "Failed to delete " + personId);
 		        	messages.put("disableSubmit", "false");
 		        }
-	        } catch (SQLException e) {
+        	} catch (NumberFormatException e) {
+        		messages.put("title", "Invalid PersonId Format");
+                messages.put("disableSubmit", "true");
+        	} catch (SQLException e) {
 				e.printStackTrace();
 				throw new IOException(e);
 	        }
         }
         
-        req.getRequestDispatcher("/UserDelete.jsp").forward(req, resp);
+        req.getRequestDispatcher("/PersonDelete.jsp").forward(req, resp);
     }
 }

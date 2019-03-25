@@ -1,6 +1,6 @@
 package movienight.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Persons {
 	
@@ -8,6 +8,7 @@ public class Persons {
 	protected String firstName;
 	protected String lastName;
 	protected Date dateOfBirth;
+	
 	public Persons(int personId, String firstName, String lastName, Date dateOfBirth) {
 		super();
 		this.personId = personId;
@@ -21,6 +22,7 @@ public class Persons {
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
 	}
+	
 	public Persons(int personId) {
 		super();
 		this.personId = personId;
@@ -49,9 +51,4 @@ public class Persons {
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
-	
-	
-	
-	
-
 }

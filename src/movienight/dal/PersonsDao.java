@@ -37,7 +37,7 @@ public class PersonsDao {
 			insertStmt = connection.prepareStatement(insertPerson,  Statement.RETURN_GENERATED_KEYS);
 			insertStmt.setString(1, person.getFirstName());
 			insertStmt.setString(2, person.getLastName());
-			insertStmt.setDate(3, person.getDateOfBirth());
+			insertStmt.setDate(3,  new Date(person.getDateOfBirth().getTime()));
 			insertStmt.executeUpdate();
 			resultKey = insertStmt.getGeneratedKeys();
 			int  personId = -1;
@@ -114,7 +114,7 @@ public class PersonsDao {
 
 
 	public Persons getPersonById(int personId) throws SQLException {
-		String selectPerson = "SELECT FirstName,LastName, PersonId FROM Person WHERE PersonId=?;";
+		String selectPerson = "SELECT * FROM Person WHERE PersonId=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
@@ -148,7 +148,7 @@ public class PersonsDao {
 	}
 
 	
-	public List<Persons> getpersonsByFirstName(String firstName) throws SQLException {
+	public List<Persons> getPersonsByFirstName(String firstName) throws SQLException {
 		List<Persons> persons = new ArrayList<Persons>();
 		String selectperson =
 			"SELECT * FROM Person WHERE FirstName=?;";
@@ -162,9 +162,10 @@ public class PersonsDao {
 			results = selectStmt.executeQuery();
 			while(results.next()) {
 				int personId = results.getInt("PersonId");
+				String resultFirstName = results.getString("FirstName");
 				String lastName = results.getString("LastName");
 				Date dateOfBirth = results.getDate("DateOfBirth");
-				Persons person = new Persons(personId, firstName, lastName, dateOfBirth);
+				Persons person = new Persons(personId, resultFirstName, lastName, dateOfBirth);
 				persons.add(person);
 			}
 		} catch (SQLException e) {

@@ -1,4 +1,4 @@
-package movienight.servlet;
+package movienight.servlet.person;
 
 import movienight.dal.*;
 import movienight.model.*;
@@ -21,14 +21,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/moviecreate")
-public class MovieCreate extends HttpServlet {
+@WebServlet("/personcreate")
+public class PersonCreate extends HttpServlet {
 	
-	protected MoviesDao moviesDao;
+	protected PersonsDao personsDao;
 	
 	@Override
 	public void init() throws ServletException {
-		moviesDao = MoviesDao.getInstance();
+		personsDao = PersonsDao.getInstance();
 	}
 	
 	@Override
@@ -38,7 +38,7 @@ public class MovieCreate extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
         //Just render the JSP.   
-        req.getRequestDispatcher("/MovieCreate.jsp").forward(req, resp);
+        req.getRequestDispatcher("/PersonCreate.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -49,26 +49,29 @@ public class MovieCreate extends HttpServlet {
         req.setAttribute("messages", messages);
 
         // Retrieve and validate name.
-        String title = req.getParameter("title");
-        if (title == null || title.trim().isEmpty()) {
-            messages.put("success", "Invalid UserName");
+        String firstname = req.getParameter("firstname");
+        String lastname = req.getParameter("lastname");
+
+        if (firstname == null || firstname.trim().isEmpty()) {
+            messages.put("success", "Invalid First Name");
+        } else if (lastname == null || lastname.trim().isEmpty()) {
+            messages.put("success", "Invalid Last Name");
         } else {
-			// Create the Movie.
-			String runTime = req.getParameter("runtime");
-			String relYear = req.getParameter("releaseYear");
-			
-			int runtime, releaseYear;
-			try {
-        		runtime = Integer.parseInt(runTime);
-        		releaseYear = Integer.parseInt(relYear);
-        	} catch (NumberFormatException e) {
+			// Create the Person.
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        	String stringDob = req.getParameter("dob");
+        	Date dob = new Date();
+        	try {
+        		dob = dateFormat.parse(stringDob);
+        	} catch (ParseException e) {
         		e.printStackTrace();
 				throw new IOException(e);
         	}
+        
 		    try {
-		    	Movies movie = new Movies(title, runtime, releaseYear);
-		    	movie = moviesDao.create(movie);
-		    	messages.put("success", "Successfully created " + title);
+		    	Persons person = new Persons(firstname, lastname, dob);
+		    	person = personsDao.create(person);
+		    	messages.put("success", "Successfully created " + person.getFirstName() + " " + person.getLastName());
 		    } catch (SQLException e) {
 				e.printStackTrace();
 				throw new IOException(e);
@@ -76,6 +79,6 @@ public class MovieCreate extends HttpServlet {
 		}
 			
         
-        req.getRequestDispatcher("/MovieCreate.jsp").forward(req, resp);
+        req.getRequestDispatcher("/PersonCreate.jsp").forward(req, resp);
     }
 }
