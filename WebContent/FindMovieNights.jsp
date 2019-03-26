@@ -29,17 +29,17 @@
 	<h1>Matching movieNights</h1>
         <table border="1">
             <tr>
-                <th>Title</th>
+                <th>MovieNightId</th>
+                <th>Movie Title</th>
                 <th>Date</th>
                 <th>Delete movieNight</th>
-                <th>Update movieNight</th>
             </tr>
             <c:forEach items="${movieNights}" var="movienight" >
                 <tr>
+					<td><c:out value="${movienight.getMovieNightId()}" /></td>
                     <td><c:out value="${movienight.getMovie().getTitle()}" /></td>
                     <td><c:out value="${movienight.getDate()}"  /></td>
                     <td><a href="movienightdelete?movienightId=<c:out value="${movienight.getMovieNightId()}"/>">Delete</a></td>
-                    <td><a href="movienightupdate?movienightId=<c:out value="${movienight.getMovieNightId()}"/>">Update</a></td>
                 </tr>
             </c:forEach>
        </table>
