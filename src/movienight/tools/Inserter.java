@@ -23,6 +23,7 @@ public class Inserter {
 		WatchedMoviesDao watchedMoviesDao = WatchedMoviesDao.getInstance();
 		LikeMoviesDao likeMoviesDao = LikeMoviesDao.getInstance();
 		WishListMoviesDao wishListMoviesDao = WishListMoviesDao.getInstance();
+		AttendancesDao attendancesDao = AttendancesDao.getInstance();
 		
 		// Create Users
 		Users val = new Users("valchar", "passwd", "Val", "Charry", "val@val.com", "555-5555");
