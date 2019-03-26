@@ -114,7 +114,12 @@ public class Inserter {
 		MovieNights sw2MovieNight = movieNightsDao.create(new MovieNights(nextWeek.getTime(), starWars2));
 		
 		// Create Attendances
-		
+		Attendances hp1attendance1 = attendancesDao.create(new Attendances(hp1MovieNight, val, Attendances.AttendanceType.valueOf("host")));
+		Attendances hp1attendance2 = attendancesDao.create(new Attendances(hp1MovieNight, olivia, Attendances.AttendanceType.valueOf("attendee")));
+		Attendances hp1attendance3 = attendancesDao.create(new Attendances(hp1MovieNight, tim, Attendances.AttendanceType.valueOf("attendee")));
+		Attendances sw2attendance1 = attendancesDao.create(new Attendances(sw2MovieNight, tim, Attendances.AttendanceType.valueOf("host")));
+		Attendances sw2attendance2 = attendancesDao.create(new Attendances(sw2MovieNight, olivia, Attendances.AttendanceType.valueOf("attendee")));
+
 		
 		// Create Reviews
 		Reviews hp1GoodReview = reviewsDao.create(new Reviews("AMAZING", 9.0, val, harryPotter1));
