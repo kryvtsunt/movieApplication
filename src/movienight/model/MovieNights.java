@@ -8,19 +8,16 @@ public class MovieNights {
 	protected Movies movie;
 	
 	public MovieNights(int movieNightId, Date date, Movies movie) {
-		super();
 		this.movieNightId = movieNightId;
 		this.date = date;
 		this.movie = movie;
 	}
 	
 	public MovieNights(Date date, Movies movie) {
-		super();
 		this.date = date;
 		this.movie = movie;
 	}
 	public MovieNights(int movieNightId) {
-		super();
 		this.movieNightId = movieNightId;
 	}
 

@@ -1,14 +1,11 @@
 package movienight.servlet.movienight;
 
 import movienight.dal.MovieNightsDao;
-import movienight.dal.UsersDao;
 import movienight.model.MovieNights;
-import movienight.model.Users;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,18 +36,18 @@ public class FindMovieNights extends HttpServlet {
 
         List<MovieNights> mns = new ArrayList<MovieNights>();
         
-        String id = req.getParameter("MovieNightId");
-        if (id == null || id.trim().isEmpty()) {
-            messages.put("success", "Please enter a valid name.");
+        String date = req.getParameter("date");
+        if (date == null || date.trim().isEmpty()) {
+            messages.put("success", "Please enter a valid date.");
         } else {
         	try {
-            	mns.add(dao.getMovieNightById(Integer.parseInt(id)));
+            	mns = (dao.getMovieNightByDate(java.sql.Date.valueOf(date)));
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);
             }
-        	messages.put("success", "Displaying results for " + id);
-        	messages.put("previousId", id);
+        	messages.put("success", "Displaying results for " + date);
+        	messages.put("previousDate", date);
         }
         req.setAttribute("movieNights", mns);
         
@@ -66,17 +63,17 @@ public class FindMovieNights extends HttpServlet {
 
         List<MovieNights> mns = new ArrayList<MovieNights>();
         
-        String id = req.getParameter("MovieNightId");
-        if (id == null || id.trim().isEmpty()) {
-            messages.put("success", "Please enter a valid name.");
+        String date = req.getParameter("date");
+        if (date == null || date.trim().isEmpty()) {
+            messages.put("success", "Please enter a valid date.");
         } else {
         	try {
-            	mns.add(dao.getMovieNightById(Integer.parseInt(id)));
+            	mns = (dao.getMovieNightByDate(java.sql.Date.valueOf(date)));
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);
             }
-        	messages.put("success", "Displaying results for " + id);
+        	messages.put("success", "Displaying results for " + date);
         }
         req.setAttribute("movieNights", mns);
         

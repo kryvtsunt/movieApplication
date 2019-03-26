@@ -11,11 +11,11 @@
 <title>Find a movieNight</title>
 </head>
 <body>
-	<form action="findmovienightnights" method="post">
-		<h1>Search a movieNight by id</h1>
+	<form action="findmovienights" method="post">
+		<h1>Search a movieNight by date</h1>
 		<p>
-			<label for="id">Id</label>
-			<input id="id" name="id" value="${fn:escapeXml(param.MovieNightId)}">
+			<label for="date">Date</label>
+			<input id="date" name="date" value="${fn:escapeXml(param.date)}">
 		</p>
 		<p>
 			<input type="submit">
@@ -24,7 +24,7 @@
 		</p>
 	</form>
 	<br/>
-	<div id="movienightNightCreate"><a href="movienightnightcreate">Create movienightNight</a></div>
+	<div id="movienightcreate"><a href="movienightcreate">Create a movieNight</a></div>
 	<br/>
 	<h1>Matching movieNights</h1>
         <table border="1">
@@ -37,9 +37,9 @@
             <c:forEach items="${movieNights}" var="movienight" >
                 <tr>
                     <td><c:out value="${movienight.getMovie().getTitle()}" /></td>
-                    <td><c:out value="${movienight.getReleaseYear()}"  /></td>
-                    <td><a href="movienightdelete?movienightId=<c:out value="${movienight.getmovienightId()}"/>">Delete</a></td>
-                    <td><a href="movienightupdate?movienightId=<c:out value="${movienight.getmovienightId()}"/>">Update</a></td>
+                    <td><c:out value="${movienight.getDate()}"  /></td>
+                    <td><a href="movienightdelete?movienightId=<c:out value="${movienight.getMovieNightId()}"/>">Delete</a></td>
+                    <td><a href="movienightupdate?movienightId=<c:out value="${movienight.getMovieNightId()}"/>">Update</a></td>
                 </tr>
             </c:forEach>
        </table>
