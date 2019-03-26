@@ -89,7 +89,7 @@ public class UsersDao {
 			updateStmt = connection.prepareStatement(updateUser);
 			updateStmt.setString(1, newEmail);
 	
-			updateStmt.setString(3, user.getUserName());
+			updateStmt.setString(2, user.getUserName());
 			updateStmt.executeUpdate();
 
 			user.setEmail(newEmail);

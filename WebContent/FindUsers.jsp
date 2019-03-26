@@ -12,9 +12,9 @@
 </head>
 <body>
 	<form action="findusers" method="post">
-		<h1>Search for a User by FirstName</h1>
+		<h1>Search for a User by First Name</h1>
 		<p>
-			<label for="firstname">FirstName</label>
+			<label for="firstname">First Name</label>
 			<input id="firstname" name="firstname" value="${fn:escapeXml(param.firstname)}">
 		</p>
 		<p>
@@ -32,7 +32,7 @@
                 <th>Username</th>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Movie Nights</th>
+                <th>Email</th>
                 <th>Reviews</th>
                 <th>Delete User</th>
                 <th>Update User</th>
@@ -42,8 +42,8 @@
                     <td><c:out value="${user.getUserName()}" /></td>
                     <td><c:out value="${user.getFirstName()}" /></td>
                     <td><c:out value="${user.getLastName()}" /></td>
-                    <td><a href="movienights?username=<c:out value="${user.getUserName()}"/>">Movie Nights</a></td>
-                    <td><a href="reviews?username=<c:out value="${user.getUserName()}"/>">Reviews</a></td>
+                    <td><c:out value="${user.getEmail()}" /></td>
+                    <td><a href="userreviews?username=<c:out value="${user.getUserName()}"/>">Reviews</a></td>
                     <td><a href="userdelete?username=<c:out value="${user.getUserName()}"/>">Delete</a></td>
                     <td><a href="userupdate?username=<c:out value="${user.getUserName()}"/>">Update</a></td>
                 </tr>
