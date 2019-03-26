@@ -163,8 +163,43 @@ public class Inserter {
 		WishListMovies oliviaWishListSw3 = wishListMoviesDao.create(new WishListMovies(starWars3, olivia));
 
 		
+				
+		// READ.
+		List<Persons> pList1 = personsDao.getPersonsByFirstName("Emma");
+			for(Persons p : pList1) {
+				System.out.format("Looping persons: pid:%d f:%s l:%s \n",
+					p.getPersonId(), p.getFirstName(), p.getLastName());
+		}
+				
+		List<Reviews> rList1 = reviewsDao.getReviewsForUser(val);
+			for(Reviews r : rList1) {
+				System.out.format("Looping persons: rid:%d r:%s c:%s \n",
+					r.getReviewId(), r.getRating(), r.getContent());
+		}
+
+		
+		//UPDATE.
+		
+		// Update Genre Name
+		sciFi = genresDao.updateName(sciFi, "Science Fiction");
 		// Update Movie Title
 		starWars1 = moviesDao.updateTitle(starWars1, "Star Wars 6");
+		// Update Person Last Name
+		emmaWatson = personsDao.updateLastName(emmaWatson, "Watsen");
+		// Update Reviews Content
+		hp1MehReview = reviewsDao.updateContent(hp1MehReview, "ehhhhhhhh");
+		// Update Users Email
+		olivia = usersDao.updateEmail(olivia, "oliviajdangelo@gmail.com");
+		
+		
+		
+		//DELETE.
+		
+		attendancesDao.delete(hp1attendance1);
+		genresDao.delete(action);
+		likeMoviesDao.delete(valLikesHp1);
+		watchedMoviesDao.delete(oliviaWatchedFf1);
+		
 		
 		
 	}
